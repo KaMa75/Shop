@@ -1,3 +1,9 @@
-.idea
-node_modules
+/node_modules
+/build
+/front/node_modules
+
 out.js
+
+.env
+
+npm-debug.log*
