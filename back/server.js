@@ -33,6 +33,27 @@ app.post('/api/users/register', (request, response) => {
     });
 });
 
+app.post('/api/users/login', (request, response) => {
+    User.findOne({'email': request.body.email}, (err, user) => {
+        if(!user) {
+            return response.json({loginSuccess: false, message: 'Błąd logowania, podany e-mail nie istnieje'});
+        }
+        user.comparePassword(request.body.password, (err, isMatch) => {
+            if(!isMatch) {
+                return response.json({loginSuccess: false, message: 'Błędne hasło'});
+            }
+            user.generateToken((err, user) => {
+                if(err) {
+                    return response.status(400).send(err);
+                }
+                response.cookie('w_auth', user.token).status(200).json({
+                    loginSuccess: true
+                });
+            });
+        });
+    });
+});
+
 
 // -----------------------------
 
