@@ -48,7 +48,10 @@ app.post('/api/users/register', (request, response) => {
     const user = new User(request.body);
     user.save((err, doc) => {
         if(err) {
-            return response.json({success: false, err});
+            return response.json({
+                success: false,
+                err
+            });
         }
         response.status(200).json({
             success: true
@@ -59,11 +62,17 @@ app.post('/api/users/register', (request, response) => {
 app.post('/api/users/login', (request, response) => {
     User.findOne({'email': request.body.email}, (err, user) => {
         if(!user) {
-            return response.json({loginSuccess: false, message: 'Błąd logowania, podany e-mail nie istnieje'});
+            return response.json({
+                loginSuccess: false,
+                message: 'Błąd logowania, podany e-mail nie istnieje'
+        });
         }
         user.comparePassword(request.body.password, (err, isMatch) => {
             if(!isMatch) {
-                return response.json({loginSuccess: false, message: 'Błędne hasło'});
+                return response.json({
+                    loginSuccess: false,
+                    message: 'Błędne hasło'
+            });
             }
             user.generateToken((err, user) => {
                 if(err) {
@@ -75,6 +84,23 @@ app.post('/api/users/login', (request, response) => {
             });
         });
     });
+});
+
+app.get('/api/user/logout', auth, (request, response) => {
+    User.findOneAndUpdate(
+        {_id: request.user.id},
+        {token: ''},
+        (err, doc) => {
+            if(err) {
+                return response.json({
+                    success: false, err
+                });
+            }
+            return response.status(200).send({
+                success: true
+            });
+        }
+    );
 });
 
 
