@@ -18,7 +18,31 @@ app.use(cookieParser());
 
 const User = require('./models/user');
 
+// -------- MIDDLEWARES --------
+
+const auth = require('./middleware/auth');
+
 // ----------- USERS -----------
+
+app.get('/api/users/auth', auth, (request, response) => {
+    response.status(200).json({
+        // user: request.user
+        isAdmin: request.user.role === 0 ? false : true,
+        isAuth: true,
+        email: request.user.email,
+        phone: request.user.phone,
+        name: request.user.name,
+        lastName: request.user.lastName,
+        street: request.user.street,
+        houseNumber: request.user.houseNumber,
+        postCode: request.user.postCode,
+        city: request.user.city,
+        country: request.user.country,
+        cart: request.user.cart,
+        history: request.user.history,
+        role: request.user.role
+    });
+});
 
 app.post('/api/users/register', (request, response) => {
     const user = new User(request.body);
@@ -27,8 +51,7 @@ app.post('/api/users/register', (request, response) => {
             return response.json({success: false, err});
         }
         response.status(200).json({
-            success: true,
-            userdata: doc
+            success: true
         });
     });
 });
