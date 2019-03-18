@@ -13,6 +13,29 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+
+// ----------- MODELS ----------
+
+const User = require('./models/user');
+
+// ----------- USERS -----------
+
+app.post('/api/users/register', (request, response) => {
+    const user = new User(request.body);
+    user.save((err, doc) => {
+        if(err) {
+            return response.json({success: false, err});
+        }
+        response.status(200).json({
+            success: true,
+            userdata: doc
+        });
+    });
+});
+
+
+// -----------------------------
+
 const port = process.env.PORT || 8081;
 
 app.listen(port, () => {
