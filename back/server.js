@@ -20,13 +20,54 @@ const User = require('./models/user');
 const Manufacturer = require('./models/manufacturer');
 const Material = require('./models/material');
 const Type = require('./models/type');
+const Destiny = require('./models/destiny');
+const Product = require('./models/product');
 
 // -------- MIDDLEWARES --------
 
 const auth = require('./middleware/auth');
 const admin = require('./middleware/admin');
 
-// ----------- TYPE ------------
+// --------- PRODUCTS ----------
+
+app.post('/api/product/article', auth, admin, (request,response) => {
+    const product = new Product(request.body);
+    product.save((err, doc) => {
+        if(err) {
+            return response.json({success: false, err});
+        }
+        response.status(200).json({
+            success: true,
+            article: doc
+        });
+    });
+});
+
+// ---------- DESTINYS ---------
+
+app.post('/api/product/destiny', auth, admin, (request,response) => {
+    const destiny = new Destiny(request.body);
+    destiny.save((err, doc) => {
+        if(err) {
+            return response.json({success: false, err});
+        }
+        response.status(200).json({
+            success: true,
+            destiny: doc
+        });
+    });
+});
+
+app.get('/api/product/destinys', (request, response) => {
+    Destiny.find({}, (err, destiny) => {
+        if(err) {
+            return response.status(400).send(err);
+        }
+        response.status(200).send(destiny);
+    });
+});
+
+// ----------- TYPES -----------
 
 app.post('/api/product/type', auth, admin, (request,response) => {
     const type = new Type(request.body);
@@ -36,7 +77,7 @@ app.post('/api/product/type', auth, admin, (request,response) => {
         }
         response.status(200).json({
             success: true,
-            material: doc
+            type: doc
         });
     });
 });
@@ -50,7 +91,7 @@ app.get('/api/product/types', (request, response) => {
     });
 });
 
-// --------- MATERIAL ----------
+// --------- MATERIALS ---------
 
 app.post('/api/product/material', auth, admin, (request,response) => {
     const material = new Material(request.body);
@@ -74,7 +115,7 @@ app.get('/api/product/materials', (request, response) => {
     });
 });
 
-// ------- MANUFACTURER --------
+// ------- MANUFACTURERS -------
 
 app.post('/api/product/manufacturer', auth, admin, (request, response) => {
     const manufacturer = new Manufacturer(request.body);
