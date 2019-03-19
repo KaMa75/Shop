@@ -17,16 +17,41 @@ app.use(cookieParser());
 // ----------- MODELS ----------
 
 const User = require('./models/user');
+const Manufacturer = require('./models/manufacturer');
 
 // -------- MIDDLEWARES --------
 
 const auth = require('./middleware/auth');
+const admin = require('./middleware/admin');
+
+// ------- MANUFACTURER --------
+
+app.post('/api/product/manufacturer', auth, admin, (request, response) => {
+    const manufacturer = new Manufacturer(request.body);
+    manufacturer.save((err, doc) => {
+        if(err) {
+            return response.json({success: false, err});
+        }
+        response.status(200).json({
+            success: true,
+            manufacturer: doc
+        });
+    });
+});
+
+app.get('/api/product/manufacturers', (request, response) => {
+    Manufacturer.find({}, (err, manufacturers) => {
+        if(err) {
+            return response.status(400).send(err);
+        }
+        response.status(200).send(manufacturers)
+    });
+});
 
 // ----------- USERS -----------
 
 app.get('/api/users/auth', auth, (request, response) => {
     response.status(200).json({
-        // user: request.user
         isAdmin: request.user.role === 0 ? false : true,
         isAuth: true,
         email: request.user.email,
