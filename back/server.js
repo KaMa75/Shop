@@ -43,6 +43,27 @@ app.post('/api/product/article', auth, admin, (request,response) => {
     });
 });
 
+app.get('/api/product/articles_by_id', (request, response) => {
+    let searchType = request.query.searchType;
+    let items = request.query.id;
+    if(searchType === "array") {
+        let ids = request.query.id.split(',');
+        items = [];
+        items = ids.map((item) => {
+            return mongoose.Types.ObjectId(item);
+        });
+    };
+    Product.find({
+        '_id': {$in:items}
+    }).populate('manufacturer')
+    .populate('destiny')
+    .populate('material')
+    .populate('type')
+    .exec((err, docs) => {
+        return response.status(200).send(docs);
+    });
+});
+
 // ---------- DESTINYS ---------
 
 app.post('/api/product/destiny', auth, admin, (request,response) => {
