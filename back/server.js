@@ -18,11 +18,61 @@ app.use(cookieParser());
 
 const User = require('./models/user');
 const Manufacturer = require('./models/manufacturer');
+const Material = require('./models/material');
+const Type = require('./models/type');
 
 // -------- MIDDLEWARES --------
 
 const auth = require('./middleware/auth');
 const admin = require('./middleware/admin');
+
+// ----------- TYPE ------------
+
+app.post('/api/product/type', auth, admin, (request,response) => {
+    const type = new Type(request.body);
+    type.save((err, doc) => {
+        if(err) {
+            return response.json({success: false, err});
+        }
+        response.status(200).json({
+            success: true,
+            material: doc
+        });
+    });
+});
+
+app.get('/api/product/types', (request, response) => {
+    Type.find({}, (err, type) => {
+        if(err) {
+            return response.status(400).send(err);
+        }
+        response.status(200).send(type);
+    });
+});
+
+// --------- MATERIAL ----------
+
+app.post('/api/product/material', auth, admin, (request,response) => {
+    const material = new Material(request.body);
+    material.save((err, doc) => {
+        if(err) {
+            return response.json({success: false, err});
+        }
+        response.status(200).json({
+            success: true,
+            material: doc
+        });
+    });
+});
+
+app.get('/api/product/materials', (request, response) => {
+    Material.find({}, (err, material) => {
+        if(err) {
+            return response.status(400).send(err);
+        }
+        response.status(200).send(material);
+    });
+});
 
 // ------- MANUFACTURER --------
 
