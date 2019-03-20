@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node back/server.js",
-    "server": "node_modules/.bin/nodemon back/server.js"
+    "server": "node_modules/.bin/nodemon back/server.js",
+    "frontWebpack": "npm run webpack --prefix front",
+    "frontDevServer": "npm run start --prefix front",
+    "dev": "concurrently \"npm run server\" \"npm run frontWebpack\" \"npm run frontDevServer\""
   },
   "repository": {
     "type": "git",
@@ -21,6 +24,7 @@
   "dependencies": {
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.3",
+    "concurrently": "^3.6.0",
     "cookie-parser": "^1.4.3",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
