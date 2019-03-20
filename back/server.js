@@ -43,6 +43,8 @@ app.post('/api/product/article', auth, admin, (request,response) => {
     });
 });
 
+// api/product/articles_by_id?id=xxxxxx&searchType=single
+// api/product/articles_by_id?id=xxxxxx,xxxxxx,xxxxxx&searchType=array
 app.get('/api/product/articles_by_id', (request, response) => {
     let searchType = request.query.searchType;
     let items = request.query.id;
@@ -53,14 +55,35 @@ app.get('/api/product/articles_by_id', (request, response) => {
             return mongoose.Types.ObjectId(item);
         });
     };
-    Product.find({
-        '_id': {$in:items}
-    }).populate('manufacturer')
+    Product
+    .find({'_id': {$in:items}})
+    .populate('manufacturer')
     .populate('destiny')
     .populate('material')
     .populate('type')
     .exec((err, docs) => {
         return response.status(200).send(docs);
+    });
+});
+
+// /api/product/articles/?sortBy=sold&order=desc&limit=4
+app.get('/api/product/articles', (request,response) => {
+    let order = request.query.order ? request.query.order : 'asc';
+    let sortBy = request.query.sortBy ? request.query.sortBy : "_id";
+    let limit = request.query.limit ? parseInt(request.query.limit) : 100;
+    Product
+    .find()
+    .populate('manufacturer')
+    .populate('destiny')
+    .populate('material')
+    .populate('type')
+    .sort([[sortBy, order]])
+    .limit(limit)
+    .exec((err, articles) => {
+        if(err) {
+            return response.status(400).send(err);
+        }
+        response.send(articles);
     });
 });
 
