@@ -1,0 +1,27 @@
+.register-login-container {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    color: $colorText;
+    background-color: $colorLightText;
+    border: 1px solid $colorDark;
+    border-top-width: 4px;
+    padding: 2rem 0;
+    display: flex;
+    &>div {
+        width: 50%;
+        padding: 4rem;
+    }
+    h2 {
+        margin-bottom: 2rem;
+    }
+    input {
+        font-size: 1.6rem;
+        padding: 1rem;
+        display: block;
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+    input:last-of-type {
+        margin-bottom: 0;
+    }
+}

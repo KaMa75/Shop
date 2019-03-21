@@ -1,4 +1,5 @@
 footer {
+    width: 100%;
     background: $colorDark;
     color: $colorBG;
     .wrapper {
@@ -23,13 +24,18 @@ footer {
     }
     h3, h4 {
         font-weight: 600;
+        color: $colorBG;
     }
-    h3, .copy {
+    h3 {
         text-align: center;
+    }
+    h4 {
+        margin-bottom: 1rem;
     }
     .copy {
         font-size: 1.2rem;
         margin-top: 2rem;
+        text-align: right;
     }
     hr {
         border-color: $colorBG;

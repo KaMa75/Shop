@@ -12,12 +12,12 @@ class Header extends Component {
                         <div className="user-nav">
                             <ul className="clear-fix">
                                 <li>                                    
-                                    <Link to="#" replace>
+                                    <Link to="/register" replace>
                                         Zarejestruj
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="#" replace>
+                                    <Link to="/login" replace>
                                         Zaloguj
                                     </Link>
                                 </li>
@@ -30,6 +30,11 @@ class Header extends Component {
                         </div>
                         <div className="main-nav">
                             <ul className="clear-fix">
+                                <li>
+                                    <Link to="/" replace>
+                                        Home
+                                    </Link>
+                                </li>
                                 <li>
                                     <Link to="#" replace>
                                         Damskie

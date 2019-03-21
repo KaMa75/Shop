@@ -1,0 +1,15 @@
+button {
+    margin-top: 4rem;
+    color: $colorHeader;
+    font-family: $fontHeader;
+    font-size: 1.6rem;
+    font-weight: 600;
+    background: $colorBG;
+    border: 1px solid $colorSemiDark;
+    padding: 1.2rem 2.5rem;
+    cursor: pointer;
+    &:hover {
+        background: $colorSemiDark;
+        color: $colorBG;
+    }
+}

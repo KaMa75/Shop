@@ -23,8 +23,19 @@ body {
     font-size: 1.6rem;
 }
 
+#app > div {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: $colorHeader;
 }
