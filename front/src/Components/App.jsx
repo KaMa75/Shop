@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 
 class App extends Component {
     componentDidMount() {
-        fetch('/api/users/auth')
+        fetch('/api/product/articles')
+            .then(response => response.json())
             .then(response => {
                 console.log(response)
             });

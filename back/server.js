@@ -266,7 +266,7 @@ app.get('/api/user/logout', auth, (request, response) => {
 
 // -----------------------------
 
-const port = process.env.PORT || 8081;
+const port = process.env.PORT || 3002;
 
 app.listen(port, () => {
     console.log(`Server Running at localhost:${port} address`);
