@@ -4,10 +4,27 @@
     box-sizing: border-box;
 }
 
+.clear-fix {
+    &::after {
+        content: '';
+        clear: both;
+        display: block;
+    }
+
+}
+
 html {
     font-family: $fontMain;
+    font-size: 10px;
 }
 
 body {
     background: $colorBG;
+    font-size: 1.6rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
