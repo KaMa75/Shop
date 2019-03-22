@@ -2,34 +2,55 @@ import React, {Component} from 'react';
 import Header from '../Header/Header.jsx';
 import Footer from '../Footer/Footer.jsx';
 import Button from '../Button.jsx';
+import Input from './Input.jsx';
 
 class Login extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            emailInput: '',
-            emailValid: false,
-            passwordInput: '',
-            passwordValid: false
+            email: {
+                type: 'email',
+                placeholder: 'Podaj e-mail',
+                value: '',
+                required: true,
+                valid: false,
+                errorMessage: ''
+            },
+            password: {
+                type: 'password',
+                placeholder: 'Podaj hasło',
+                value: '',
+                required: true,
+                valid: false,
+                errorMessage: ''
+            }
         }
     }
 
-    changeInputValue = (name) => (event) => {
+    inputValue = (name, value) => {
         this.setState({
-            [name]: event.target.value
+            [name]: value
         });
     }
 
-    validInputValue = (name, value) => () => {
-        if(value !== '') {
-            this.setState({
-                [name]: true
-            });
-        } else {
-            console.log('no')
-
+    inputValid = (name, value) => {
+        const inputData = {
+            ...value
         }
+        if(inputData.required) {
+            const valid = inputData.value.trim() !== '';
+            inputData.errorMessage = valid ? '' : 'To pole jest wymagane';
+            inputData.valid = valid ? true : false;
+        }
+        if(inputData.type === 'email' && inputData.valid) {
+            const valid = /\S+@\S+\.\S+/.test(inputData.value);
+            inputData.errorMessage = valid ? '' : 'Niepoprawny e-mail';
+            inputData.valid = valid ? true : false;
+        }
+        this.setState({
+            [name]: inputData
+        });
     }
 
     render() {
@@ -49,19 +70,17 @@ class Login extends Component {
                         </div>
                         <div className="login-container">
                             <h2>Logowanie</h2>
-                            <input
-                                type='email'
-                                placeholder='Podaj e-mail'
-                                value={ this.state.emailInput }
-                                onChange={ this.changeInputValue('emailInput') }
-                                onBlur={ this.validInputValue('emailValid', this.state.emailInput) }
+                            <Input
+                                id='email'
+                                inputData={ this.state.email }
+                                onChange={ this.inputValue }
+                                onBlur={ this.inputValid }
                             />
-                            <input
-                                type='password'
-                                placeholder='Podaj hasło'
-                                value={ this.state.passwordInput }
-                                onChange={ this.changeInputValue('passwordInput') }
-                                onBlur={ this.validInputValue('passwordValid', this.state.passwordInput) }
+                            <Input
+                                id='password'
+                                inputData={ this.state.password }
+                                onChange={ this.inputValue }
+                                onBlur={ this.inputValid }
                             />
                             <Button
                                 linkTo='#'
