@@ -1,15 +1,29 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import MainPage from './MainPage/MainPage.jsx';
 import Register from './Register_login/Register.jsx';
 import Login from './Register_login/Login.jsx';
+import Dashboard from './Dashboard/Dashboard.jsx';
 
-const Routes = () => {
+const Routes = (props) => {
+    const {loggedIn, setUserState} = props;
+    console.log(props);
+    console.log(loggedIn, setUserState);
     return (
         <Switch>
             <Route exact path='/' component={ MainPage } />
             <Route exact path='/register' component={ Register } />
-            <Route exact path='/login' component={ Login } />
+            <Route exact path='/user/dashboard' component={ Dashboard } />
+            <Route exact path='/login' render={ () => (
+                loggedIn ? (
+                    <Redirect to='/user/dashboard' />
+                ) : (
+                    <Login
+                        loggedIn={ loggedIn }
+                        setUserState={ setUserState }
+                    />
+                )
+            )} />
         </Switch>
     );
 };

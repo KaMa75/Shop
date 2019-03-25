@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import Header from '../Header/Header.jsx';
 import Footer from '../Footer/Footer.jsx';
 import Button from '../Button.jsx';
 import Input from './Input.jsx';
+
+const urlLogin = '/api/users/login';
 
 class Login extends Component {
 
@@ -24,7 +27,9 @@ class Login extends Component {
                 required: true,
                 valid: false,
                 errorMessage: ''
-            }
+            },
+            formError: false,
+            errorMsg: ''
         }
     }
 
@@ -49,8 +54,51 @@ class Login extends Component {
             inputData.valid = valid ? true : false;
         }
         this.setState({
-            [name]: inputData
+            [name]: inputData,
+            formError: false
         });
+    }
+
+    submitData = (event) => {
+        let formError = this.state.formError;
+        const dataToSubmit = {
+            email: this.state.email.value,
+            password: this.state.password.value
+        }
+        for(let key in dataToSubmit) {
+            if (!this.state[key].valid) {
+                formError = true;
+                this.setState({
+                    formError: formError,
+                    errorMsg: 'Nieprawidłowe dane.'
+                });
+            }
+        }
+        if(!formError) {
+            axios.post(urlLogin, dataToSubmit)
+            .then(response => {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    throw new Error('Błąd połączenia');
+                }
+            })
+            .then(response => {
+                console.log(response);
+                const loginSuccess = response.loginSuccess;
+                if(loginSuccess) {
+                    this.props.setUserState(response.loginSuccess);
+                } else {
+                    this.setState({
+                        formError: !loginSuccess,
+                        errorMsg: response.message
+                    });
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
     }
 
     render() {
@@ -82,11 +130,16 @@ class Login extends Component {
                                 onChange={ this.inputValue }
                                 onBlur={ this.inputValid }
                             />
-                            <Button
-                                linkTo='#'
+                            { this.state.formError && (
+                                <div className="error-msg">
+                                    { this.state.errorMsg }
+                                </div>
+                            )}
+                            <button
+                                onClick={ this.submitData }
                             >
                                 Zaloguj
-                            </Button>
+                            </button>
                         </div>
                     </div>
                 </div>
