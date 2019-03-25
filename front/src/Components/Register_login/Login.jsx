@@ -103,7 +103,7 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <Header />
+                {/* <Header /> */}
                 <div className="container">
                     <div className="register-login-container">
                         <div className="register-container">
@@ -142,7 +142,7 @@ class Login extends Component {
                         </div>
                     </div>
                 </div>
-                <Footer />
+                {/* <Footer /> */}
             </div>
         );
     }

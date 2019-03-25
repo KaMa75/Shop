@@ -193,7 +193,7 @@ class Register extends Component {
     render() {
         return (
             <div>
-                <Header />
+                {/* <Header /> */}
                 <div className="container">
                     <div className="register-login-container">
                         <form className="register-form">
@@ -282,7 +282,7 @@ class Register extends Component {
                     </div>
                 </div>
                 { this.state.showPopUp && <RegisterPopup /> }
-                <Footer />
+                {/* <Footer /> */}
             </div>
         );
     }
