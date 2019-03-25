@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Header from '../Header/Header.jsx';
-import Footer from '../Footer/Footer.jsx';
 import Input from './Input.jsx';
 import RegisterPopup from './RegisterPopup.jsx';
 
@@ -193,7 +191,6 @@ class Register extends Component {
     render() {
         return (
             <div>
-                {/* <Header /> */}
                 <div className="container">
                     <div className="register-login-container">
                         <form className="register-form">
@@ -282,7 +279,6 @@ class Register extends Component {
                     </div>
                 </div>
                 { this.state.showPopUp && <RegisterPopup /> }
-                {/* <Footer /> */}
             </div>
         );
     }

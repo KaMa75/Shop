@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
+import LayoutDashboard from '../LayoutDashboard.jsx';
 
 class Dashboard extends Component {
     render() {
         return (
-            <div>
-                
+            <LayoutDashboard>
                 dashboard
-                
-            </div>
+            </LayoutDashboard>
         );
     }
 }
