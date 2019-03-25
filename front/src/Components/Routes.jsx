@@ -7,8 +7,6 @@ import Dashboard from './Dashboard/Dashboard.jsx';
 
 const Routes = (props) => {
     const {loggedIn, setUserState} = props;
-    console.log(props);
-    console.log(loggedIn, setUserState);
     return (
         <Switch>
             <Route exact path='/' component={ MainPage } />
