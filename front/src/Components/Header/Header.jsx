@@ -16,7 +16,6 @@ class Header extends Component {
         });
     }
     render() {
-        console.log(this.props.loggedIn)
         return (
             <header>
                 <div className="container">
