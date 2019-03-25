@@ -9,7 +9,7 @@ export const userNav = [
     },
     {
         name: 'Koszyk',
-        link: '/basket'
+        link: '/user/cart'
     }
 ];
 
@@ -20,11 +20,11 @@ export const loggedUserNav = [
     },
     {
         name: 'Moje konto',
-        link: '/my_account'
+        link: '/user/dashboard'
     },
     {
         name: 'Koszyk',
-        link: '/basket'
+        link: '/user/cart'
     }
 ];
 
