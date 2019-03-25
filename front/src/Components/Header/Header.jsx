@@ -16,6 +16,7 @@ class Header extends Component {
         });
     }
     render() {
+        console.log(this.props.loggedIn)
         return (
             <header>
                 <div className="container">
@@ -23,7 +24,7 @@ class Header extends Component {
                     <nav className="clear-fix">
                         <div className="user-nav">
                             <ul className="clear-fix">
-                                { this.generateLinks(userNav) }
+                                { (this.props.loggedIn) ? this.generateLinks(loggedUserNav) : this.generateLinks(userNav) }
                             </ul>
                         </div>
                         <div className="main-nav">

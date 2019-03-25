@@ -6,8 +6,10 @@ class Layout extends Component {
     render() {
         return (
             <div>
-                <Header />
-                { this.props.children }
+                <Header
+                    loggedIn={ this.props.loggedIn }
+                />
+                    { this.props.children }
                 <Footer />
             </div>
         );
