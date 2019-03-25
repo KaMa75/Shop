@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo.jsx';
+import { userNav, loggedUserNav, mainNav } from '../../data/navData';
 
 class Header extends Component {
+    generateLinks(linksArray) {
+        return linksArray.map((item, index) => {
+            return (
+                <li key={ index }>
+                    <Link to={ item.link } replace>
+                        { item.name }
+                    </Link>
+                </li>
+            );
+        });
+    }
     render() {
         return (
             <header>
@@ -11,45 +23,12 @@ class Header extends Component {
                     <nav className="clear-fix">
                         <div className="user-nav">
                             <ul className="clear-fix">
-                                <li>                                    
-                                    <Link to="/register" replace>
-                                        Zarejestruj
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/login" replace>
-                                        Zaloguj
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="#" replace>
-                                        Koszyk
-                                    </Link>
-                                </li>
+                                { this.generateLinks(userNav) }
                             </ul>
                         </div>
                         <div className="main-nav">
                             <ul className="clear-fix">
-                                <li>
-                                    <Link to="/" replace>
-                                        Home
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="#" replace>
-                                        Damskie
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="#" replace>
-                                        Męskie
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="#" replace>
-                                        Dziecięce
-                                    </Link>
-                                </li>
+                                { this.generateLinks(mainNav) }
                             </ul>
                         </div>
                     </nav>
