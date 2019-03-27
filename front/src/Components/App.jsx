@@ -1,29 +1,58 @@
 import React, { Component } from 'react';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
+import axios from 'axios';
 import Routes from './Routes.jsx';
+const urlAuth = '/api/users/auth';
+
+const cookie = document.cookie;
+const isToken = (cookie.indexOf('w_auth') >= 0) ? true : false;
 
 class App extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            userLoggedIn: false
+            user: {
+                isAuth: isToken,
+                isAdmin: false
+            }
         }
     }
-    setUserLoggedState = (value) => {
+
+    setAppState = (name, value) => {
         this.setState({
-            userLoggedIn: value
+            [name]: value
         });
     }
+
+    componentDidMount() {
+        axios.get(urlAuth)
+        .then(response => {
+            if(response.status === 200) {
+                return response.data;
+            } else {
+                throw new Error('Błąd połączenia');
+            }
+        })
+        .then(response => {
+            this.setAppState('user', response);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+
     render() {
         return (
             <HashRouter>
                 <Routes
-                    loggedIn={ this.state.userLoggedIn }
-                    setUserState={ this.setUserLoggedState }
+                    userData={ this.state.user }
+                    setAppState={ this.setAppState }
                 />
             </HashRouter>
         );
     }
+
 }
 
 export default App;

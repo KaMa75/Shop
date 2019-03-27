@@ -7,22 +7,32 @@ import Login from './Register_login/Login.jsx';
 import Dashboard from './Dashboard/Dashboard.jsx';
 
 const Routes = (props) => {
-    const {loggedIn, setUserState} = props;
+    const {userData, setAppState} = props;
+    console.log(userData)
     return (
         <Layout
-            loggedIn={ loggedIn }
+            loggedIn={ userData.isAuth }
         >
             <Switch>
                 <Route exact path='/' component={ MainPage } />
                 <Route exact path='/register' component={ Register } />
-                <Route exact path='/user/dashboard' component={ Dashboard } />
+                <Route exact path='/user/dashboard' render={ () => (
+                    !userData.isAuth ? (
+                        <Redirect to='/login' />
+                    ) : (
+                        <Dashboard
+                            userData={ userData }
+                            setAppState={ setAppState }
+                        />
+                    )
+                )} />
                 <Route exact path='/login' render={ () => (
-                    loggedIn ? (
+                    userData.isAuth ? (
                         <Redirect to='/user/dashboard' />
                     ) : (
                         <Login
-                            loggedIn={ loggedIn }
-                            setUserState={ setUserState }
+                            loggedIn={ userData.isAuth }
+                            setAppState={ setAppState }
                         />
                     )
                 )} />

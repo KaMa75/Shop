@@ -4,6 +4,7 @@ import Button from '../Button.jsx';
 import Input from './Input.jsx';
 
 const urlLogin = '/api/users/login';
+const urlAuth = '/api/users/auth';
 
 class Login extends Component {
 
@@ -28,7 +29,7 @@ class Login extends Component {
             },
             formError: false,
             errorMsg: ''
-        }
+        };
     }
 
     inputValue = (name, value) => {
@@ -84,7 +85,8 @@ class Login extends Component {
             .then(response => {
                 const loginSuccess = response.loginSuccess;
                 if(loginSuccess) {
-                    this.props.setUserState(response.loginSuccess);
+                    this.props.setAppState('userLoggedIn', response.loginSuccess);
+                    this.auth();
                 } else {
                     this.setState({
                         formError: !loginSuccess,
@@ -96,6 +98,23 @@ class Login extends Component {
                 console.log(error);
             });
         }
+    }
+
+    auth() {
+        axios.get(urlAuth)
+        .then(response => {
+            if(response.status === 200) {
+                return response.data;
+            } else {
+                throw new Error('Błąd połączenia');
+            }
+        })
+        .then(response => {
+            this.props.setAppState('user', response);
+        })
+        .catch(error => {
+            console.log(error);
+        });
     }
 
     render() {
