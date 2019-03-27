@@ -5,18 +5,18 @@ import { dashUserNav } from '../data/dashNavData';
 class LayoutDashboard extends Component {
     render() {
         return (
-            <div>
+            <div className="dashboard">
                 <div className="container">
-                    <div className="dashNav">
-                        <h2>
+                    <div className="dashboard-navigation">
+                        <h3>
                             Moje konto
-                        </h2>
+                        </h3>
                         <Navigation
                             navLinks={ dashUserNav }
                             className="dash-nav"
                         />
                     </div>
-                    <div className="dashUserContent">
+                    <div className="dash-user-content">
                         { this.props.children }
                     </div>
                 </div>

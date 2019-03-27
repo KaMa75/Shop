@@ -1,0 +1,27 @@
+.dashboard {
+    height: 100%;
+    .container {
+        display: flex;
+    }
+    .dashboard-navigation {
+        background: rgba($color: $colorDark, $alpha: 0.2);
+        width: 25%;
+        min-width: 250px;
+        padding: 4rem 3rem;
+        ul {
+            list-style: none;
+        }
+        li {
+            // margin-left: 15px;
+        }
+        a {
+            font-size:1.6rem;
+            font-weight: normal;
+            color: $colorDark;
+            text-decoration: none;
+            &:hover {
+                color: $colorHoverMenu;
+            }
+        }
+    }
+}

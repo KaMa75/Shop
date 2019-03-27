@@ -16,15 +16,21 @@
 html {
     font-family: $fontMain;
     font-size: 10px;
+    height: 100%;
 }
 
 body {
     background: $colorBG;
     font-size: 1.6rem;
+    height: 100%;
+}
+
+#app {
+    height: 100%;
 }
 
 #app > div {
-    min-height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
