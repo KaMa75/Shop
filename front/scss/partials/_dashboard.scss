@@ -3,16 +3,39 @@
     .container {
         display: flex;
     }
+    ul, .user-nfo-panel {
+        border-top: 2px solid $colorDark;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        width: 100%;
+    }
+    .user-nfo-panel {
+        padding: 2rem;
+        background-color: $colorLightText;
+        button {
+            margin-top: 2rem;
+        }
+    }
+    .dash-user-content {
+        width: 100%;
+        padding: 3rem;
+    }
+    .user-nfo-panel-wrapper {
+        &:nth-of-type(n+2) {
+            margin-top: 3rem;
+        }
+    }
     .dashboard-navigation {
+        height: 100%;
         background: rgba($color: $colorDark, $alpha: 0.2);
         width: 25%;
         min-width: 250px;
-        padding: 4rem 3rem;
+        padding: 3rem;
         ul {
             list-style: none;
         }
         li {
-            // margin-left: 15px;
+            padding: 0.3rem 0;
         }
         a {
             font-size:1.6rem;
