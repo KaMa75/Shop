@@ -4,16 +4,13 @@ import axios from 'axios';
 import Routes from './Routes.jsx';
 const urlAuth = '/api/users/auth';
 
-const cookie = document.cookie;
-const isToken = (cookie.indexOf('w_auth') >= 0) ? true : false;
-
 class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             user: {
-                isAuth: isToken,
+                isAuth: this.props.isToken,
                 isAdmin: false
             }
         }

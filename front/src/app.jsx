@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import "../scss/style.scss";
-
 import App from './Components/App.jsx';
+
+import "../scss/style.scss";
+const cookie = document.cookie;
+const isToken = (cookie.indexOf('w_auth') >= 0) ? true : false;
+
 
 document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
-        <App />,
+        <App isToken={ isToken } />,
         document.getElementById('app')
     );
 });
