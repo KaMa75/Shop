@@ -9,7 +9,7 @@
     "server": "node_modules/.bin/nodemon back/server.js",
     "frontWebpack": "npm run webpack --prefix front",
     "frontDevServer": "npm run start --prefix front",
-    "dev": "concurrently \"npm run server\" \"npm run frontWebpack\" \"npm run frontDevServer\""
+    "dev": "concurrently \"npm run frontWebpack\" \"npm run frontDevServer\""
   },
   "repository": {
     "type": "git",
