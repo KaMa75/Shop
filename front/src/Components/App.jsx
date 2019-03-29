@@ -10,7 +10,7 @@ class App extends Component {
         super(props);
         this.state = {
             user: {
-                isAuth: this.props.isToken,
+                isAuth: false,
                 isAdmin: false
             }
         }

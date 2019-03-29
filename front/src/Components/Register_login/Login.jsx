@@ -85,7 +85,7 @@ class Login extends Component {
             .then(response => {
                 const loginSuccess = response.loginSuccess;
                 if(loginSuccess) {
-                    this.props.setAppState('userLoggedIn', response.loginSuccess);
+                    // this.props.setAppState('userLoggedIn', response.loginSuccess);
                     this.auth();
                 } else {
                     this.setState({

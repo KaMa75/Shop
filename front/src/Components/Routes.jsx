@@ -4,11 +4,11 @@ import Layout from './Layout.jsx';
 import MainPage from './MainPage/MainPage.jsx';
 import Register from './Register_login/Register.jsx';
 import Login from './Register_login/Login.jsx';
+import Logout from './Logout.jsx';
 import Dashboard from './Dashboard/Dashboard.jsx';
 
 const Routes = (props) => {
     const {userData, setAppState} = props;
-    console.log(userData)
     return (
         <Layout
             loggedIn={ userData.isAuth }
@@ -19,9 +19,18 @@ const Routes = (props) => {
                 <Route exact path='/user/dashboard' render={ () => (
                     !userData.isAuth ? (
                         <Redirect to='/login' />
-                    ) : (
-                        <Dashboard
+                        ) : (
+                            <Dashboard
                             userData={ userData }
+                            setAppState={ setAppState }
+                            />
+                            )
+                            )} />
+                <Route exact path='/user/logout' render={ () => (
+                    !userData.isAuth ? (
+                        <Redirect to='/' />
+                    ) : (
+                        <Logout
                             setAppState={ setAppState }
                         />
                     )

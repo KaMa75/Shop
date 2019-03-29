@@ -16,7 +16,7 @@ export const userNav = [
 export const loggedUserNav = [
     {
         name: 'Wyloguj',
-        link: '/logout'
+        link: '/user/logout'
     },
     {
         name: 'Moje konto',
