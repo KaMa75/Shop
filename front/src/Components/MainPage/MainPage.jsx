@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import MainSlider from './MainSlider.jsx';
 import MainPromotion from './MainPromotion.jsx';
+import ProductsBlock from './ProductsBlock.jsx';
 
 const urlArticles = '/api/product/articles';
 
@@ -19,7 +20,9 @@ class MainPage extends Component {
         axios.get(`${urlArticles}?sortBy=sold&order=desc&limit=4`)
         .then(response => response.data)
         .then(response => {
-            console.log(response);
+            this.setState({
+                productsBySell: response
+            });
         });
     }
 
@@ -27,7 +30,9 @@ class MainPage extends Component {
         axios.get(`${urlArticles}?sortBy=createdAt&order=desc&limit=4`)
         .then(response => response.data)
         .then(response => {
-            console.log(response);
+            this.setState({
+                productsByArrival: response
+            });
         });
     }
 
@@ -40,10 +45,15 @@ class MainPage extends Component {
         return (
             <div className='main-page'>
                 <MainSlider />
-                <div className='container'>
-                    MainPage
-                </div>
+                <ProductsBlock
+                    products={ this.state.productsBySell }
+                    title='Najczęściej kupowane'
+                />
                 <MainPromotion />
+                <ProductsBlock
+                    products={ this.state.productsByArrival }
+                    title='Najnowsze produkty'
+                />
             </div>
         );
     }
