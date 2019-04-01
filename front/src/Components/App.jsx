@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 import axios from 'axios';
 import Routes from './Routes.jsx';
+import Loading from './Loading.jsx';
+
 const urlAuth = '/api/users/auth';
 
 class App extends Component {
@@ -12,8 +14,9 @@ class App extends Component {
             user: {
                 isAuth: false,
                 isAdmin: false
-            }
-        }
+            },
+            isLoaded: false
+        };
     }
 
     setAppState = (name, value) => {
@@ -33,6 +36,7 @@ class App extends Component {
         })
         .then(response => {
             this.setAppState('user', response);
+            this.setAppState('isLoaded', true);
         })
         .catch(error => {
             console.log(error);
@@ -40,14 +44,17 @@ class App extends Component {
     }
 
     render() {
-        return (
-            <HashRouter>
-                <Routes
-                    userData={ this.state.user }
-                    setAppState={ this.setAppState }
-                />
-            </HashRouter>
-        );
+        if(this.state.isLoaded) {
+            return (
+                <HashRouter>
+                    <Routes
+                        userData={ this.state.user }
+                        setAppState={ this.setAppState }
+                    />
+                </HashRouter>
+            );
+        }
+        return <Loading />
     }
 
 }
