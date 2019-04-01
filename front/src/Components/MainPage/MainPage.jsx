@@ -20,10 +20,21 @@ class MainPage extends Component {
         .then(response => response.data)
         .then(response => {
             console.log(response);
-        })
+        });
     }
 
+    getProductsByArrival() {
+        axios.get(`${urlArticles}?sortBy=createdAt&order=desc&limit=4`)
+        .then(response => response.data)
+        .then(response => {
+            console.log(response);
+        });
+    }
 
+    componentDidMount() {
+        this.getProductsBySell();
+        this.getProductsByArrival();
+    }
 
     render() {
         return (
