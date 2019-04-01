@@ -1,5 +1,5 @@
 export const promotion = {
-    img: '../../images/slides/slide_1.jpg',
+    img: '../../images/slides/slide_3.jpg',
     header: 'Wielka wyprzedaż',
     content: 'Kup 2 pary, a otrzymasz 40 % zniżki na drugą parę',
     btnText: 'Kup teraz',
