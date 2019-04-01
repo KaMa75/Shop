@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Logo from '../Logo.jsx';
-import { userNav, loggedUserNav, mainNav } from '../../data/navData';
+import { userNav, loggedUserNav, mainNav } from '../../configData/navData';
 import Navigation from '../Navigation.jsx';
 
 class Header extends Component {

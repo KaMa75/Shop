@@ -1,0 +1,41 @@
+.slide, .home-promotion {
+    width: 100%;
+    position: relative;
+    .slide-img, .promotion-img {
+        width: 100%; 
+        max-height: calc(100vh - 142px);
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-size: 100% !important;
+    }
+    .slide-img {
+        height: 65vw;
+    }
+    .promotion-img {
+        min-height: 20rem;
+    }
+    .container {
+        height: 100%;
+        position: relative;
+    }
+    .slide-content, .promotion-content {
+        width: 40%;        
+        color: $colorLightText;
+        h1, h2 {
+            color: $colorLightText;
+            margin-bottom: 1rem;
+        }
+        p {
+            font-family: $fontMain;
+            font-size: 1.8rem;
+        }
+    }
+    .slide-content {
+        position: absolute;
+        bottom: 20%;
+        h2 {
+            margin-bottom: 4rem;
+        }
+    }
+}

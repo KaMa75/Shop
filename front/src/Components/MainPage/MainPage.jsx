@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-// import Header from '../Header/Header.jsx';
-// import Footer from '../Footer/Footer.jsx';
+import MainSlider from './MainSlider.jsx';
+import MainPromotion from './MainPromotion.jsx';
 
 class MainPage extends Component {
     render() {
         return (
-            <div>
-                {/* <Header /> */}
-                MainPage
-                {/* <Footer /> */}
+            <div className='main-page'>
+                <MainSlider />
+                <div className='container'>
+                    MainPage
+                </div>
+                <MainPromotion />
             </div>
         );
     }
