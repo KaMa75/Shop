@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navigation from './Navigation.jsx';
-import { dashUserNav } from '../data/dashNavData';
+import { dashUserNav } from '../configData/dashNavData';
 
 class LayoutDashboard extends Component {
     render() {
