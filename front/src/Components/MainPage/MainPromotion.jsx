@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import Button from '../Button.jsx';
 import { promotion } from '../../configData/mainPromotion';
 
-console.log(promotion)
-console.log(promotion.btnText)
-
 class MainPromotion extends Component {
     render() {
         if(promotion) {
