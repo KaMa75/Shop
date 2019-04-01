@@ -1,0 +1,13 @@
+.products-block {
+    width: 100%;
+    h2 {
+        padding-bottom: 2rem;
+        border-bottom: 2px solid $colorDark;
+    }
+}
+
+.products-cards {
+    padding: 3rem 0;
+    display: flex;
+    justify-content: space-around;
+}

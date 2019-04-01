@@ -12,17 +12,13 @@ const ProductCard = (props) => {
     console.log(props);
     return (
         <div className='product-card-container'>
-            <div
-                className="product-image"
-                style={{
-                    background: `url(${genCardImage(props.images)}) no-repeat`
-                }}
-            >
+            <div className="product-image">
+                <img src={ genCardImage(props.images) } alt=""/>
             </div>
             <div className="product-card-content">
-                <h3>{ props.manufacturer.name }</h3>
+                <h2>{ props.manufacturer.name }</h2>
                 <h4>{ props.name }</h4>
-                <h4>{ props.price }</h4>
+                <h2>{ `${props.price} zł` }</h2>
             </div>
             <div className="product-card-buttons">
                 <button>
