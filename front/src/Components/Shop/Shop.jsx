@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ShopPageTop from '../ShopPageTop.jsx';
+import CheckboxBox from './CheckboxBox.jsx';
 import axios from 'axios';
 
 const urlManufacturers = '/api/product/manufacturers';
@@ -61,6 +62,11 @@ class Shop extends Component {
         this.getTypes();
     }
 
+    handleFilters = () => {
+        //-------
+        console.log('filtrowanie');
+    }
+
     render() {
         return (            
             <div className="container">
@@ -69,7 +75,14 @@ class Shop extends Component {
                 </ShopPageTop>
                 <div className="shop-wrapper">
                     <div className="shop-filters">
-
+                        { (this.state.manufacturers.length > 0) && (
+                            <CheckboxBox
+                                collapsed={ false }
+                                title='Producent'
+                                list={ this.state.manufacturers }
+                                actionFilters={ this.handleFilters }
+                            />
+                        ) }
                     </div>
                     <div className="shop-products">
 
