@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import ShopPageTop from '../ShopPageTop.jsx';
-import CheckBox from './CheckboxBox.jsx';
+import CheckBox from './CheckBox.jsx';
+import RadioBox from './RadioBox.jsx';
 import axios from 'axios';
+
+import { price } from '../../configData/priceFilters';
 
 const urlManufacturers = '/api/product/manufacturers';
 const urlMaterials = '/api/product/materials';
@@ -69,15 +72,32 @@ class Shop extends Component {
         this.getTypes();
     }
 
+    findFilterPriceRange(id) {
+        let range = [];
+        for(let key in price) {
+            if(price[key]._id === Number(id)) {
+                range = [...price[key].range];
+            }
+        }
+        return range;
+    }
+
     handleFilters = (filters, category) => {
         const newFilters = {...this.state.filters};
         newFilters[category] = filters;
+
+        if(category === 'price') {
+            const priceRange = this.findFilterPriceRange(filters);
+            newFilters[category] = priceRange;
+        }
+
         this.setState({
             filters: newFilters
         });
     }
 
     render() {
+        console.log(this.state.filters);
         return (            
             <div className="container">
                 <ShopPageTop>
@@ -95,7 +115,7 @@ class Shop extends Component {
                         ) }
                         { (this.state.materials.length > 0) && (
                             <CheckBox
-                                open={ true }
+                                open={ false }
                                 title='Materiał'
                                 list={ this.state.materials }
                                 handleFilters={ (filters) => this.handleFilters(filters, 'materials') }
@@ -103,7 +123,7 @@ class Shop extends Component {
                         ) }
                         { (this.state.destinys.length > 0) && (
                             <CheckBox
-                                open={ true }
+                                open={ false }
                                 title='Przeznaczenie'
                                 list={ this.state.destinys }
                                 handleFilters={ (filters) => this.handleFilters(filters, 'destinys') }
@@ -111,10 +131,18 @@ class Shop extends Component {
                         ) }
                         { (this.state.types.length > 0) && (
                             <CheckBox
-                                open={ true }
+                                open={ false }
                                 title='Typ'
                                 list={ this.state.types }
                                 handleFilters={ (filters) => this.handleFilters(filters, 'types') }
+                            />
+                        ) }
+                        { (price.length > 0) && (
+                            <RadioBox
+                                open={ true }
+                                title='Cena'
+                                list={ price }
+                                handleFilters={ (filters) => this.handleFilters(filters, 'price') }
                             />
                         ) }
                     </div>
