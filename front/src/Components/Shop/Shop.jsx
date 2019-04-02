@@ -16,7 +16,8 @@ class Shop extends Component {
             manufacturers: [],
             materials: [],
             destinys: [],
-            types: []
+            types: [],
+            filters: {}
         }
     }
 
@@ -62,9 +63,9 @@ class Shop extends Component {
         this.getTypes();
     }
 
-    handleFilters = () => {
+    handleFilters = (filters, category) => {
         //-------
-        console.log('filtrowanie');
+        console.log(filters, category);
     }
 
     render() {
@@ -80,31 +81,31 @@ class Shop extends Component {
                                 open={ true }
                                 title='Producent'
                                 list={ this.state.manufacturers }
-                                actionFilters={ this.handleFilters }
+                                handleFilters={ (filters) => this.handleFilters(filters, 'manufacturers') }
                             />
                         ) }
                         { (this.state.materials.length > 0) && (
                             <CheckboxBox
                                 open={ true }
                                 title='Materiał'
-                                list={ this.state.manufacturers }
-                                actionFilters={ this.handleFilters }
+                                list={ this.state.materials }
+                                handleFilters={ (filters) => this.handleFilters(filters, 'materials') }
                             />
                         ) }
                         { (this.state.destinys.length > 0) && (
                             <CheckboxBox
                                 open={ true }
                                 title='Przeznaczenie'
-                                list={ this.state.manufacturers }
-                                actionFilters={ this.handleFilters }
+                                list={ this.state.destinys }
+                                handleFilters={ (filters) => this.handleFilters(filters, 'destinys') }
                             />
                         ) }
                         { (this.state.types.length > 0) && (
                             <CheckboxBox
                                 open={ true }
                                 title='Typ'
-                                list={ this.state.manufacturers }
-                                actionFilters={ this.handleFilters }
+                                list={ this.state.types }
+                                handleFilters={ (filters) => this.handleFilters(filters, 'types') }
                             />
                         ) }
                     </div>
