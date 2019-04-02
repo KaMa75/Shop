@@ -1,0 +1,54 @@
+.shop-filters {
+    background: rgba($color: $colorDark, $alpha: 0.2);
+    width: 25%;
+    min-width: 250px;
+    .checkbox-wrapper, .radiobox-wrapper {
+        ul {
+            padding: 0 !important;
+        }
+    }
+    .checkbox-list-header, .radiobox-list-header {
+        background-color: $colorDark;
+        border-bottom: 1px solid rgba($color: $colorLightText, $alpha: 0.2);
+        span {
+            font-family: $fontMain !important;
+            font-size: 1.6rem !important;
+            font-weight: normal !important;
+            color: $colorLightText !important;
+        }
+        svg {
+            color: $colorLightText !important;
+        }
+    }
+    .filter-list-item {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        span {
+            font-family: $fontSecond;
+            font-size: 1.6rem;
+            font-weight: normal;
+            color: $colorDark;
+        }
+    }
+}
+
+.checkbox-list {
+    .filter-list-checkbox {
+        color: $colorDark !important;
+    }
+}
+
+.radiobox-list {
+    .filter-list-item {
+        margin-left: 0;
+        margin-right: 0;
+        padding-right: 32px;
+        padding-left: 24px;
+        span {
+            height: auto;
+        }
+    }
+    &>div {
+        padding: 8px 0;
+    }
+}

@@ -98,56 +98,58 @@ class Shop extends Component {
 
     render() {
         console.log(this.state.filters);
-        return (            
-            <div className="container">
+        return (
+            <div className='shop-page'>
                 <ShopPageTop>
                     Znajdź buty dla siebie
                 </ShopPageTop>
-                <div className="shop-wrapper">
-                    <div className="shop-filters">
-                        { (this.state.manufacturers.length > 0) && (
-                            <CheckBox
-                                open={ true }
-                                title='Producent'
-                                list={ this.state.manufacturers }
-                                handleFilters={ (filters) => this.handleFilters(filters, 'manufacturers') }
-                            />
-                        ) }
-                        { (this.state.materials.length > 0) && (
-                            <CheckBox
-                                open={ false }
-                                title='Materiał'
-                                list={ this.state.materials }
-                                handleFilters={ (filters) => this.handleFilters(filters, 'materials') }
-                            />
-                        ) }
-                        { (this.state.destinys.length > 0) && (
-                            <CheckBox
-                                open={ false }
-                                title='Przeznaczenie'
-                                list={ this.state.destinys }
-                                handleFilters={ (filters) => this.handleFilters(filters, 'destinys') }
-                            />
-                        ) }
-                        { (this.state.types.length > 0) && (
-                            <CheckBox
-                                open={ false }
-                                title='Typ'
-                                list={ this.state.types }
-                                handleFilters={ (filters) => this.handleFilters(filters, 'types') }
-                            />
-                        ) }
-                        { (price.length > 0) && (
-                            <RadioBox
-                                open={ true }
-                                title='Cena'
-                                list={ price }
-                                handleFilters={ (filters) => this.handleFilters(filters, 'price') }
-                            />
-                        ) }
-                    </div>
-                    <div className="shop-products">
+                <div className="container">
+                    <div className="shop-wrapper">
+                        <div className="shop-filters">
+                            { (this.state.manufacturers.length > 0) && (
+                                <CheckBox
+                                    open={ true }
+                                    title='Producent'
+                                    list={ this.state.manufacturers }
+                                    handleFilters={ (filters) => this.handleFilters(filters, 'manufacturers') }
+                                />
+                            ) }
+                            { (this.state.materials.length > 0) && (
+                                <CheckBox
+                                    open={ false }
+                                    title='Materiał'
+                                    list={ this.state.materials }
+                                    handleFilters={ (filters) => this.handleFilters(filters, 'materials') }
+                                />
+                            ) }
+                            { (this.state.destinys.length > 0) && (
+                                <CheckBox
+                                    open={ false }
+                                    title='Przeznaczenie'
+                                    list={ this.state.destinys }
+                                    handleFilters={ (filters) => this.handleFilters(filters, 'destinys') }
+                                />
+                            ) }
+                            { (this.state.types.length > 0) && (
+                                <CheckBox
+                                    open={ false }
+                                    title='Typ'
+                                    list={ this.state.types }
+                                    handleFilters={ (filters) => this.handleFilters(filters, 'types') }
+                                />
+                            ) }
+                            { (price.length > 0) && (
+                                <RadioBox
+                                    open={ true }
+                                    title='Cena'
+                                    list={ price }
+                                    handleFilters={ (filters) => this.handleFilters(filters, 'price') }
+                                />
+                            ) }
+                        </div>
+                        <div className="shop-products">
 
+                        </div>
                     </div>
                 </div>
             </div>
