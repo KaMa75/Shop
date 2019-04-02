@@ -4,7 +4,7 @@ import faAngleUp from '@fortawesome/fontawesome-free-solid/faAngleUp';
 import faAngleDown from '@fortawesome/fontawesome-free-solid/faAngleDown';
 import { List, ListItem, ListItemText, Collapse, ListItemSecondaryAction, Checkbox } from '@material-ui/core';
 
-class CheckboxBox extends Component {
+class CheckBox extends Component {
 
     constructor(props) {
         super(props);
@@ -59,7 +59,6 @@ class CheckboxBox extends Component {
     }
 
     render() {
-        console.log(this.state.checked);
         return (
             <div className='checkbox-wrapper'>
                 <List
@@ -94,4 +93,4 @@ class CheckboxBox extends Component {
     }
 }
 
-export default CheckboxBox;
+export default CheckBox;

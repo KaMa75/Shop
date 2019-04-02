@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ShopPageTop from '../ShopPageTop.jsx';
-import CheckboxBox from './CheckboxBox.jsx';
+import CheckBox from './CheckboxBox.jsx';
 import axios from 'axios';
 
 const urlManufacturers = '/api/product/manufacturers';
@@ -17,7 +17,13 @@ class Shop extends Component {
             materials: [],
             destinys: [],
             types: [],
-            filters: {}
+            filters: {
+                manufacturers: [],
+                materials: [],
+                destinys: [],
+                types: [],
+                price: []
+            }
         }
     }
 
@@ -64,8 +70,11 @@ class Shop extends Component {
     }
 
     handleFilters = (filters, category) => {
-        //-------
-        console.log(filters, category);
+        const newFilters = {...this.state.filters};
+        newFilters[category] = filters;
+        this.setState({
+            filters: newFilters
+        });
     }
 
     render() {
@@ -77,7 +86,7 @@ class Shop extends Component {
                 <div className="shop-wrapper">
                     <div className="shop-filters">
                         { (this.state.manufacturers.length > 0) && (
-                            <CheckboxBox
+                            <CheckBox
                                 open={ true }
                                 title='Producent'
                                 list={ this.state.manufacturers }
@@ -85,7 +94,7 @@ class Shop extends Component {
                             />
                         ) }
                         { (this.state.materials.length > 0) && (
-                            <CheckboxBox
+                            <CheckBox
                                 open={ true }
                                 title='Materiał'
                                 list={ this.state.materials }
@@ -93,7 +102,7 @@ class Shop extends Component {
                             />
                         ) }
                         { (this.state.destinys.length > 0) && (
-                            <CheckboxBox
+                            <CheckBox
                                 open={ true }
                                 title='Przeznaczenie'
                                 list={ this.state.destinys }
@@ -101,7 +110,7 @@ class Shop extends Component {
                             />
                         ) }
                         { (this.state.types.length > 0) && (
-                            <CheckboxBox
+                            <CheckBox
                                 open={ true }
                                 title='Typ'
                                 list={ this.state.types }
