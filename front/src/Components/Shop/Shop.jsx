@@ -77,8 +77,32 @@ class Shop extends Component {
                     <div className="shop-filters">
                         { (this.state.manufacturers.length > 0) && (
                             <CheckboxBox
-                                collapsed={ false }
+                                open={ true }
                                 title='Producent'
+                                list={ this.state.manufacturers }
+                                actionFilters={ this.handleFilters }
+                            />
+                        ) }
+                        { (this.state.materials.length > 0) && (
+                            <CheckboxBox
+                                open={ true }
+                                title='Materiał'
+                                list={ this.state.manufacturers }
+                                actionFilters={ this.handleFilters }
+                            />
+                        ) }
+                        { (this.state.destinys.length > 0) && (
+                            <CheckboxBox
+                                open={ true }
+                                title='Przeznaczenie'
+                                list={ this.state.manufacturers }
+                                actionFilters={ this.handleFilters }
+                            />
+                        ) }
+                        { (this.state.types.length > 0) && (
+                            <CheckboxBox
+                                open={ true }
+                                title='Typ'
                                 list={ this.state.manufacturers }
                                 actionFilters={ this.handleFilters }
                             />
