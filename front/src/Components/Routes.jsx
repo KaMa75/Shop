@@ -6,6 +6,7 @@ import Register from './Register_login/Register.jsx';
 import Login from './Register_login/Login.jsx';
 import Logout from './Logout.jsx';
 import Dashboard from './Dashboard/Dashboard.jsx';
+import Shop from './Shop/Shop.jsx';
 
 const Routes = (props) => {
     const {userData, setAppState} = props;
@@ -16,6 +17,7 @@ const Routes = (props) => {
             <Switch>
                 <Route exact path='/' component={ MainPage } />
                 <Route exact path='/register' component={ Register } />
+                <Route exact path='/shop' component={ Shop } />
                 <Route exact path='/user/dashboard' render={ () => (
                     !userData.isAuth ? (
                         <Redirect to='/login' />
@@ -25,7 +27,7 @@ const Routes = (props) => {
                             setAppState={ setAppState }
                             />
                             )
-                            )} />
+                )} />
                 <Route exact path='/user/logout' render={ () => (
                     !userData.isAuth ? (
                         <Redirect to='/' />

@@ -34,6 +34,10 @@ export const mainNav = [
         link: '/'
     },
     {
+        name: 'Sklep',
+        link: '/shop'
+    },
+    {
         name: 'Damskie',
         link: '#'
     },
