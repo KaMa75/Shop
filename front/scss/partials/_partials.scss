@@ -1,16 +1,23 @@
-@import 'base';
-@import 'button';
-@import 'inputs';
-@import 'loader';
-@import 'header';
-@import 'login';
-@import 'register';
-@import 'modal';
-@import 'slider_promotion';
-@import 'dashboard';
-@import 'homepage';
-@import 'productsBlock';
-@import 'productCard';
-@import 'homepage';
-@import 'footer';
-@import 'shop';
+@import 'base/base';
+@import 'base/loader';
+@import 'base/header';
+@import 'base/footer';
+
+@import 'elements/button';
+@import 'elements/inputs';
+
+@import 'register_login/login';
+@import 'register_login/register';
+@import 'register_login/modal';
+
+@import 'home/slider_promotion';
+@import 'home/homepage';
+
+@import 'products/productsBlock';
+@import 'products/productCard';
+
+@import 'shop/shopFilters';
+@import 'shop/shopProducts';
+@import 'shop/shopTop';
+
+@import 'dashboard/dashboard';
