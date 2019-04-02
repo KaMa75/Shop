@@ -3,6 +3,7 @@ import { BrowserRouter, HashRouter } from 'react-router-dom';
 import axios from 'axios';
 import Routes from './Routes.jsx';
 import Loading from './Loading.jsx';
+import Error from './Error.jsx';
 
 const urlAuth = '/api/users/auth';
 
@@ -15,7 +16,8 @@ class App extends Component {
                 isAuth: false,
                 isAdmin: false
             },
-            isLoaded: false
+            isLoaded: false,
+            isError: false
         };
     }
 
@@ -39,6 +41,7 @@ class App extends Component {
             this.setAppState('isLoaded', true);
         })
         .catch(error => {
+            this.setAppState('isError', true);
             console.log(error);
         });
     }
@@ -53,6 +56,9 @@ class App extends Component {
                     />
                 </HashRouter>
             );
+        }
+        if(this.state.isError) {
+            return <Error />;
         }
         return <Loading />
     }
