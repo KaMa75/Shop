@@ -69,7 +69,20 @@ class Shop extends Component {
     }
 
     getProducts() {
-        const filters = this.state.filters;
+        const {
+            manufacturers: manufacturer,
+            materials: material,
+            destinys: destiny,
+            types: type,
+            price
+        } = this.state.filters;
+        const filters = {
+            manufacturer,
+            material,
+            destiny,
+            type,
+            price
+        }
         const settings = {
             ...this.state.reqSet,
             filters

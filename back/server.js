@@ -36,10 +36,8 @@ app.post('/api/product/shop', (request, response) => {
     let order = request.body.order ? request.body.order : "desc";
     let sortBy = request.body.sortBy ? request.body.sortBy : "_id";
     let limit = request.body.limit ? parseInt(request.body.limit) : 100;
-    let skip = request.body.limit ? parseInt(request.body.limit) : 0;
+    let skip = request.body.skip ? parseInt(request.body.skip) : 0;
     let findArgs = {};
-
-    console.log(request.body);
 
     for(let key in request.body.filters) {
         if(request.body.filters[key].length > 0) {
@@ -53,8 +51,6 @@ app.post('/api/product/shop', (request, response) => {
             }
         }
     }
-
-    console.log(findArgs);
 
     Product
     .find(findArgs)
