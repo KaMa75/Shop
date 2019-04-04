@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ShopPageTop from '../ShopPageTop.jsx';
 import CheckBox from './CheckBox.jsx';
 import RadioBox from './RadioBox.jsx';
+import FilteredProducts from './FilteredProducts.jsx';
 import axios from 'axios';
 
 import { price } from '../../configData/priceFilters';
@@ -29,7 +30,8 @@ class Shop extends Component {
                 types: [],
                 price: []
             },
-            reqSet: initRequestSettings
+            reqSet: initRequestSettings,
+            products: []
         }
     }
 
@@ -89,15 +91,16 @@ class Shop extends Component {
         }
         axios.post(urlShopProducts, settings)
             .then(response => {
-                if(response.status === 200) {
-                    console.log(response)
-                    return response.data;
+                if(response.status === 200) {                    
+                    return response.data.products;
                 } else {
                     throw new Error('Błąd połączenia');
                 }
             })
             .then(response => {
-                console.log(response);
+                this.setState({
+                    products: response
+                });
             })
             .catch(error => {
                 console.log(error);
@@ -140,7 +143,7 @@ class Shop extends Component {
     }
 
     render() {
-        console.log(this.state.filters);
+        console.log(this.state.products);
         return (
             <div className='shop-page'>
                 <ShopPageTop>
@@ -191,7 +194,9 @@ class Shop extends Component {
                             ) }
                         </div>
                         <div className="shop-products">
-
+                            <FilteredProducts
+                                products={ this.state.products }
+                            />
                         </div>
                     </div>
                 </div>

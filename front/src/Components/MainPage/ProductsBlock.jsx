@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductCard from './ProductCard.jsx';
+import ProductCard from '../ProductCard.jsx';
 
 const genBlock = (arr) => {
     return arr.map((item, i) => {

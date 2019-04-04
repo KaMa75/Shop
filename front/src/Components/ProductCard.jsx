@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from '../Button.jsx';
+import Button from './Button.jsx';
 
 class ProductCard extends Component {
 
