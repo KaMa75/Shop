@@ -1,4 +1,4 @@
 export const initRequestSettings = {
-    limit: 6,
+    limit: 9,
     skip: 0
 }

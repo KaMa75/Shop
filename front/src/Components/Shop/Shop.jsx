@@ -29,7 +29,7 @@ class Shop extends Component {
                 types: [],
                 price: []
             },
-            initReqSet: initRequestSettings
+            reqSet: initRequestSettings
         }
     }
 
@@ -69,13 +69,15 @@ class Shop extends Component {
     }
 
     getProducts() {
+        const filters = this.state.filters;
         const settings = {
-            ...this.state.initReqSet,
-            ...this.state.filters
+            ...this.state.reqSet,
+            filters
         }
         axios.post(urlShopProducts, settings)
             .then(response => {
                 if(response.status === 200) {
+                    console.log(response)
                     return response.data;
                 } else {
                     throw new Error('Błąd połączenia');
@@ -117,7 +119,10 @@ class Shop extends Component {
         }
 
         this.setState({
-            filters: newFilters
+            filters: newFilters,
+            reqSet: initRequestSettings
+        }, () => {
+            this.getProducts();
         });
     }
 

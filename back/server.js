@@ -30,6 +30,53 @@ const admin = require('./middleware/admin');
 
 // --------- PRODUCTS ----------
 
+// filtered products
+
+app.post('/api/product/shop', (request, response) => {
+    let order = request.body.order ? request.body.order : "desc";
+    let sortBy = request.body.sortBy ? request.body.sortBy : "_id";
+    let limit = request.body.limit ? parseInt(request.body.limit) : 100;
+    let skip = request.body.limit ? parseInt(request.body.limit) : 0;
+    let findArgs = {};
+
+    console.log(request.body);
+
+    for(let key in request.body.filters) {
+        if(request.body.filters[key].length > 0) {
+            if(key === 'price') {
+                findArgs[key] = {
+                    $gte: request.body.filters[key][0],
+                    $lte: request.body.filters[key][1]
+                }
+            } else {
+                findArgs[key] = request.body.filters[key];
+            }
+        }
+    }
+
+    console.log(findArgs);
+
+    Product
+    .find(findArgs)
+    .populate('manufacturer')
+    .populate('destiny')
+    .populate('material')
+    .populate('type')
+    .sort([[sortBy, order]])
+    .skip(skip)
+    .limit(limit)
+    .exec((err, products) => {
+        if(err) {
+            return response.status(400).send(err);
+        }
+        response.status(200).json({
+            products
+        });
+    });
+});
+
+//-------------
+
 app.post('/api/product/article', auth, admin, (request,response) => {
     const product = new Product(request.body);
     product.save((err, doc) => {
