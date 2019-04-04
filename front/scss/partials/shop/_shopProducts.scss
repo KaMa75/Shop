@@ -1,0 +1,27 @@
+.shop-products {
+    width: 200%;
+    .no-result {
+        margin-left: 2rem;
+    }
+    .products-card {
+        button {
+            display: block;
+            margin-top: 2rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    .products-cards {
+        padding: 0;
+        display: block;
+    }
+    .product-card-container {
+        width: 31%;
+        float: left;
+        margin-left: 2.3%;
+        margin-bottom: 2rem;
+    }
+    a {
+        text-decoration: none;
+    }
+}

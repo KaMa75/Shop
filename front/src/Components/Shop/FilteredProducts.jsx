@@ -18,7 +18,7 @@ const renderProductsCard = (list) => {
         if(list.length > 0) {
             element = (
                 <div className="products-card">
-                    <section className="products-cards">
+                    <section className="products-cards clear-fix">
                         { genProductsList(list) }
                     </section>
                     <button>

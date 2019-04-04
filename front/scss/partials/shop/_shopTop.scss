@@ -1,5 +1,5 @@
 .shop-page {
-    height: 100%;
+    height: 200%;
 }
 
 .shop-page-top {
@@ -7,4 +7,8 @@
     h2 {
         color: $colorBG;
     }
+}
+
+.shop-wrapper {
+    display: flex;
 }
