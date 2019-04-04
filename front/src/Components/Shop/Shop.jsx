@@ -5,11 +5,13 @@ import RadioBox from './RadioBox.jsx';
 import axios from 'axios';
 
 import { price } from '../../configData/priceFilters';
+import { initRequestSettings } from '../../configData/shopRequestSettings';
 
 const urlManufacturers = '/api/product/manufacturers';
 const urlMaterials = '/api/product/materials';
 const urlDestinys = '/api/product/destinys';
 const urlTypes = '/api/product/types';
+const urlShopProducts = '/api/product/shop';
 
 class Shop extends Component {
 
@@ -26,26 +28,27 @@ class Shop extends Component {
                 destinys: [],
                 types: [],
                 price: []
-            }
+            },
+            initReqSet: initRequestSettings
         }
     }
 
     getData(url, stateName) {
         axios.get(url)
-        .then(response => {
-            if(response.status === 200) {
-                return response.data;
-            } else {
-                throw new Error('Błąd połączenia');
-            }
-        })
-        .then(response => {
-            this.setState({
-                [stateName]: response
-            });
-        })
-        .catch(error => {
-            console.log(error);
+            .then(response => {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    throw new Error('Błąd połączenia');
+                }
+            })
+            .then(response => {
+                this.setState({
+                    [stateName]: response
+                });
+            })
+            .catch(error => {
+                console.log(error);
         });
     }
 
@@ -65,11 +68,33 @@ class Shop extends Component {
         this.getData(urlTypes, 'types');
     }
 
+    getProducts() {
+        const settings = {
+            ...this.state.initReqSet,
+            ...this.state.filters
+        }
+        axios.post(urlShopProducts, settings)
+            .then(response => {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    throw new Error('Błąd połączenia');
+                }
+            })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+        });
+    }
+
     componentDidMount() {
         this.getManufacturers();
         this.getMaterials();
         this.getDestinys();
         this.getTypes();
+        this.getProducts();
     }
 
     findFilterPriceRange(id) {
