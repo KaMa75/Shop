@@ -1,59 +1,58 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ProductCard from '../ProductCard.jsx';
 import Loading from '../Loading.jsx';
 
-const genProductsList = (list) => {
-    return list.map((item) => {
-        return (
-            <ProductCard
-                key={ item._id }
-                { ...item }
-            />
-        );
-    });
-}
+class FilteredProducts extends Component {
 
-const renderProductsCard = (list, loadMore, showLoadMoreBtn, isLoaded) => {
-    let element = null;
-    if(list) {
-        if(list.length > 0) {
-            element = (
-                <div className="products-card">
-                    <section className="products-cards clear-fix">
-                        { genProductsList(list) }
-                    </section>
-                    {
-                        showLoadMoreBtn ? (
-                            <button
-                                onClick={ loadMore }
-                            >
-                                Pokaż więcej
-                            </button>
-                        ) : null
-                    }
-                </div>
+    genProductsList(list) {
+        return list.map((item) => {
+            return (
+                <ProductCard
+                    key={ item._id }
+                    { ...item }
+                />
             );
-        } else {
-            isLoaded ? (
-                element = (
-                    <div className="no-result">
-                        <p>Brak produktów spełniających podane kryteria wyszukiwania.</p>
-                    </div>
-                )
-            ) : (
-            element = <Loading />
-            );
-        }
+        });
     }
-    return element;
-};
 
-const FilteredProducts = (props) => {
-    return (
-        <div>
-            { renderProductsCard(props.products, props.loadMore, props.showLoadMoreBtn, props.isLoaded) }
-        </div>
-    );
-};
+    renderProductsCard() {
+        return (
+            <div className="products-card">
+                <section className="products-cards clear-fix">
+                    { this.genProductsList(this.props.products) }
+                </section>
+                {
+                    this.props.showLoadMoreBtn ? (
+                        <button
+                            onClick={ this.props.loadMore }
+                        >
+                            Pokaż więcej
+                        </button>
+                    ) : null
+                }
+            </div>
+        );
+    };
+
+    showIfNoProducts() {
+        return this.props.isLoaded ? (
+            <div className="no-result">
+                <p>Brak produktów spełniających podane kryteria wyszukiwania.</p>
+            </div>
+        ) : (
+            <Loading />
+        );
+    }
+
+    render() {
+        return (
+            (this.props.products.length > 0) ? (
+                <div>
+                    { this.renderProductsCard() }
+                </div>
+            ) : this.showIfNoProducts()
+        );
+    }
+}
 
 export default FilteredProducts;
