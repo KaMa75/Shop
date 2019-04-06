@@ -70,7 +70,7 @@ class Shop extends Component {
         this.getData(urlTypes, 'types');
     }
 
-    getProducts() {
+    getProducts(resetProducts=true) {
         const {
             manufacturers: manufacturer,
             materials: material,
@@ -98,8 +98,14 @@ class Shop extends Component {
                 }
             })
             .then(response => {
+                let products;
+                if(resetProducts) {
+                    products = response;
+                } else {
+                    products = [...this.state.products, ...response];
+                }
                 this.setState({
-                    products: response
+                    products
                 });
             })
             .catch(error => {
@@ -142,8 +148,20 @@ class Shop extends Component {
         });
     }
 
+    loadMore = () => {
+        console.log('load more');
+        console.log(this.state.reqSet);
+        const newReqSet = {...this.state.reqSet}
+        newReqSet.skip = newReqSet.skip + newReqSet.limit;
+        this.setState({
+            reqSet: newReqSet
+        }, () => {
+            this.getProducts(false);
+        });
+    }
+
     render() {
-        console.log(this.state.products);
+        console.log(this.state.reqSet);
         return (
             <div className='shop-page'>
                 <ShopPageTop>
@@ -196,6 +214,7 @@ class Shop extends Component {
                         <div className="shop-products">
                             <FilteredProducts
                                 products={ this.state.products }
+                                loadMore={ this.loadMore }
                             />
                         </div>
                     </div>

@@ -12,7 +12,7 @@ const genProductsList = (list) => {
     });
 }
 
-const renderProductsCard = (list) => {
+const renderProductsCard = (list, loadMore) => {
     let element = null;
     if(list) {
         if(list.length > 0) {
@@ -21,7 +21,9 @@ const renderProductsCard = (list) => {
                     <section className="products-cards clear-fix">
                         { genProductsList(list) }
                     </section>
-                    <button>
+                    <button
+                        onClick={ loadMore }
+                    >
                         Pokaż więcej
                     </button>
                 </div>
@@ -40,7 +42,7 @@ const renderProductsCard = (list) => {
 const FilteredProducts = (props) => {
     return (
         <div>
-            { renderProductsCard(props.products) }
+            { renderProductsCard(props.products, props.loadMore) }
         </div>
     );
 };
