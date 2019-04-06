@@ -31,7 +31,8 @@ class Shop extends Component {
                 price: []
             },
             reqSet: initRequestSettings,
-            products: []
+            products: [],
+            showLoadMoreBtn: false
         }
     }
 
@@ -98,18 +99,31 @@ class Shop extends Component {
                 }
             })
             .then(response => {
+                const showLoadMoreBtn = (response.length > this.state.reqSet.limit) ? true : false;
+                let productsToAdd = response.slice(0, this.state.reqSet.limit);
                 let products;
                 if(resetProducts) {
-                    products = response;
+                    products = productsToAdd;
                 } else {
-                    products = [...this.state.products, ...response];
+                    products = [...this.state.products, ...productsToAdd];
                 }
                 this.setState({
-                    products
+                    products,
+                    showLoadMoreBtn
                 });
             })
             .catch(error => {
                 console.log(error);
+        });
+    }
+    
+    loadMore = () => {
+        const newReqSet = {...this.state.reqSet}
+        newReqSet.skip = newReqSet.skip + newReqSet.limit;
+        this.setState({
+            reqSet: newReqSet
+        }, () => {
+            this.getProducts(false);
         });
     }
 
@@ -148,20 +162,7 @@ class Shop extends Component {
         });
     }
 
-    loadMore = () => {
-        console.log('load more');
-        console.log(this.state.reqSet);
-        const newReqSet = {...this.state.reqSet}
-        newReqSet.skip = newReqSet.skip + newReqSet.limit;
-        this.setState({
-            reqSet: newReqSet
-        }, () => {
-            this.getProducts(false);
-        });
-    }
-
     render() {
-        console.log(this.state.reqSet);
         return (
             <div className='shop-page'>
                 <ShopPageTop>
@@ -215,6 +216,7 @@ class Shop extends Component {
                             <FilteredProducts
                                 products={ this.state.products }
                                 loadMore={ this.loadMore }
+                                showLoadMoreBtn={ this.state.showLoadMoreBtn }
                             />
                         </div>
                     </div>

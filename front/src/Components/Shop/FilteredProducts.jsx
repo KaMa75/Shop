@@ -12,7 +12,7 @@ const genProductsList = (list) => {
     });
 }
 
-const renderProductsCard = (list, loadMore) => {
+const renderProductsCard = (list, loadMore, showLoadMoreBtn) => {
     let element = null;
     if(list) {
         if(list.length > 0) {
@@ -21,11 +21,15 @@ const renderProductsCard = (list, loadMore) => {
                     <section className="products-cards clear-fix">
                         { genProductsList(list) }
                     </section>
-                    <button
-                        onClick={ loadMore }
-                    >
-                        Pokaż więcej
-                    </button>
+                    {
+                        showLoadMoreBtn ? (
+                            <button
+                                onClick={ loadMore }
+                            >
+                                Pokaż więcej
+                            </button>
+                        ) : null
+                    }
                 </div>
             );
         } else {
@@ -42,7 +46,7 @@ const renderProductsCard = (list, loadMore) => {
 const FilteredProducts = (props) => {
     return (
         <div>
-            { renderProductsCard(props.products, props.loadMore) }
+            { renderProductsCard(props.products, props.loadMore, props.showLoadMoreBtn) }
         </div>
     );
 };

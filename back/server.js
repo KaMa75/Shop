@@ -35,7 +35,7 @@ const admin = require('./middleware/admin');
 app.post('/api/product/shop', (request, response) => {
     let order = request.body.order ? request.body.order : "desc";
     let sortBy = request.body.sortBy ? request.body.sortBy : "_id";
-    let limit = request.body.limit ? parseInt(request.body.limit) : 100;
+    let limit = request.body.limit ? parseInt(request.body.limit) + 1 : 100;
     let skip = request.body.skip ? parseInt(request.body.skip) : 0;
     let findArgs = {};
 
