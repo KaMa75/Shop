@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import ShopPageTop from '../ShopPageTop.jsx';
-// import CheckBox from './CheckBox.jsx';
-// import RadioBox from './RadioBox.jsx';
 import FilteredProducts from './FilteredProducts.jsx';
 import FiltersSection from './FiltersSection.jsx';
 import axios from 'axios';
