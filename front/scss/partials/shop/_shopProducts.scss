@@ -1,5 +1,8 @@
 .shop-products {
     width: 100%;
+    & > div {
+        height: 100%;
+    }
     .no-result {
         margin-left: 2rem;
     }

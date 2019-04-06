@@ -32,7 +32,8 @@ class Shop extends Component {
             },
             reqSet: initRequestSettings,
             products: [],
-            showLoadMoreBtn: false
+            showLoadMoreBtn: false,
+            productsIsLoaded: false
         }
     }
 
@@ -72,6 +73,9 @@ class Shop extends Component {
     }
 
     getProducts(resetProducts=true) {
+        this.setState({
+            productsIsLoaded: false
+        });
         const {
             manufacturers: manufacturer,
             materials: material,
@@ -109,7 +113,8 @@ class Shop extends Component {
                 }
                 this.setState({
                     products,
-                    showLoadMoreBtn
+                    showLoadMoreBtn,
+                    productsIsLoaded: true
                 });
             })
             .catch(error => {
@@ -217,6 +222,7 @@ class Shop extends Component {
                                 products={ this.state.products }
                                 loadMore={ this.loadMore }
                                 showLoadMoreBtn={ this.state.showLoadMoreBtn }
+                                isLoaded={ this.state.productsIsLoaded }
                             />
                         </div>
                     </div>

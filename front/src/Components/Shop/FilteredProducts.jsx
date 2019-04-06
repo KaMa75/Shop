@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductCard from '../ProductCard.jsx';
+import Loading from '../Loading.jsx';
 
 const genProductsList = (list) => {
     return list.map((item) => {
@@ -12,7 +13,7 @@ const genProductsList = (list) => {
     });
 }
 
-const renderProductsCard = (list, loadMore, showLoadMoreBtn) => {
+const renderProductsCard = (list, loadMore, showLoadMoreBtn, isLoaded) => {
     let element = null;
     if(list) {
         if(list.length > 0) {
@@ -33,10 +34,14 @@ const renderProductsCard = (list, loadMore, showLoadMoreBtn) => {
                 </div>
             );
         } else {
-            element = (
-                <div className="no-result">
-                    <p>Brak produktów spełniających podane kryteria wyszukiwania.</p>
-                </div>
+            isLoaded ? (
+                element = (
+                    <div className="no-result">
+                        <p>Brak produktów spełniających podane kryteria wyszukiwania.</p>
+                    </div>
+                )
+            ) : (
+            element = <Loading />
             );
         }
     }
@@ -46,7 +51,7 @@ const renderProductsCard = (list, loadMore, showLoadMoreBtn) => {
 const FilteredProducts = (props) => {
     return (
         <div>
-            { renderProductsCard(props.products, props.loadMore, props.showLoadMoreBtn) }
+            { renderProductsCard(props.products, props.loadMore, props.showLoadMoreBtn, props.isLoaded) }
         </div>
     );
 };
