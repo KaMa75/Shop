@@ -22,8 +22,9 @@ class ProductCard extends Component {
                     <img src={ this.genCardImage(this.props.images) } alt=""/>
                 </div>
                 <div className="product-card-content">
-                    <h2>{ this.props.manufacturer.name }</h2>
                     <h4>{ this.props.name }</h4>
+                    <h2>{ this.props.manufacturer.name }</h2>
+                    <h4>{ this.props.model }</h4>
                     <h2>{ `${this.props.price} zł` }</h2>
                 </div>
                 <div className="product-card-buttons">
