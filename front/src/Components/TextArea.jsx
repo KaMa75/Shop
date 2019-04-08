@@ -27,6 +27,7 @@ class TextArea extends Component {
         return (
             <div className="input">
                 <textarea
+                    rows="4"
                     placeholder={ placeholder }
                     value={ value }
                     onChange={ this.inputValue }

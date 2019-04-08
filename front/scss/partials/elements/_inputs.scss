@@ -1,11 +1,23 @@
-.input {
+.input, .select {
     margin-bottom: 2rem;
 }
 
-input {
+input, textarea, select {
     color: $colorHeader;
     font-size: 1.6rem;
     padding: 1rem;
     display: block;
     width: 100%;
+    font-family: $fontMain;
+}
+
+textarea {
+    resize: none;
+}
+
+.select {
+    option {
+        padding-top: 0.5rem; 
+        padding-bottom: 0.5rem;
+    }
 }
