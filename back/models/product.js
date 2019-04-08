@@ -44,8 +44,8 @@ const productSchema = mongoose.Schema({
     },
     color: {
         required: true,
-        type: Array,
-        default: []
+        type: String,
+        maxlength: 50
     },
     size: {
         required: true,
