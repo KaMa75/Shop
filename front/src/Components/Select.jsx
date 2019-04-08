@@ -35,10 +35,11 @@ class Select extends Component {
     }
 
     render() {
-        const {valid, errorMessage } = this.props.selectData;
+        const {value, valid, errorMessage } = this.props.selectData;
         return (
             <div className="select">
                 <select
+                    value={ value }
                     onChange={ this.selectValue }
                     onBlur={ this.selectValid }
                 >
