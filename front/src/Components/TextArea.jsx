@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Input extends Component {
+class TextArea extends Component {
 
     inputValue = (event) => {
         if(typeof this.props.onChange === 'function') {
@@ -24,11 +24,10 @@ class Input extends Component {
     }
 
     render() {
-        const {type, placeholder, value, valid, errorMessage } = this.props.inputData;
+        const {placeholder, value, valid, errorMessage } = this.props.inputData;
         return (
             <div className="input">
-                <input
-                    type={ type }
+                <textarea
                     placeholder={ placeholder }
                     value={ value }
                     onChange={ this.inputValue }
@@ -40,6 +39,7 @@ class Input extends Component {
             </div>
         );
     }
+
 }
 
-export default Input;
+export default TextArea;

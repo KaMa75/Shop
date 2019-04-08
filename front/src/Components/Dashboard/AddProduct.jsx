@@ -1,15 +1,259 @@
 import React, { Component } from 'react';
 import LayoutDashboard from '../LayoutDashboard.jsx';
+import Input from '../Input.jsx';
+import TextArea from '../TextArea.jsx';
+import Select from '../Select.jsx';
+
+const urlManufacturers = '/api/product/manufacturers';
+const urlMaterials = '/api/product/materials';
+const urlDestinys = '/api/product/destinys';
+const urlTypes = '/api/product/types';
 
 class AddProduct extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: {
+                type: 'text',
+                placeholder: 'Nazwa produktu',
+                value: '',
+                required: true,
+                valid: false,
+                errorMessage: ''
+            },
+            model: {
+                type: 'text',
+                placeholder: 'Model',
+                value: '',
+                required: true,
+                valid: false,
+                errorMessage: ''
+            },
+            description: {
+                placeholder: 'Opis produktu',
+                value: '',
+                required: true,
+                valid: false,
+                errorMessage: ''
+            },
+            price: {
+                type: 'number',
+                placeholder: 'Cena',
+                value: '',
+                required: true,
+                valid: false,
+                errorMessage: ''
+            },
+            manufacturer: {
+                options: [],
+                value: '',
+                required: true,
+                valid: false,
+                errorMessage: ''
+            },
+            material: {
+                options: [],
+                value: '',
+                required: true,
+                valid: false,
+                errorMessage: ''
+            },
+            type: {
+                options: [],
+                value: '',
+                required: true,
+                valid: false,
+                errorMessage: ''
+            },
+            destiny: {
+                options: [],
+                value: '',
+                required: true,
+                valid: false,
+                errorMessage: ''
+            },
+            color: {
+                type: 'text',
+                placeholder: 'Kolor',
+                value: '',
+                required: true,
+                valid: false,
+                errorMessage: ''
+            },
+            size: {
+                type: 'number',
+                placeholder: 'Rozmiar',
+                value: '',
+                required: true,
+                valid: false,
+                errorMessage: ''
+            },
+            available: {
+                options: [
+                    {key: true, value: 'Dostępne'},
+                    {key: false, value: 'Niedostępne'}
+                ],
+                value: '',
+                required: true,
+                valid: false,
+                errorMessage: ''
+            },
+            publish: {
+                options: [
+                    {key: true, value: 'Pokaż'},
+                    {key: false, value: 'Ukryj'}
+                ],
+                value: '',
+                required: true,
+                valid: false,
+                errorMessage: ''
+            },
+            formError: false,
+            errorMsg: '',
+            showPopUp: false
+        }
+    }
+
+    getData(url, stateName) {
+        axios.get(url)
+            .then(response => {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    throw new Error('Błąd połączenia');
+                }
+            })
+            .then(response => {
+                this.setState({
+                    [stateName]: response
+                });
+            })
+            .catch(error => {
+                console.log(error);
+        });
+    }
+
+    getCategories() {
+        // this.getData(urlManufacturers, 'manufacturers');
+        // this.getData(urlMaterials, 'materials');
+        // this.getData(urlDestinys, 'destinys');
+        // this.getData(urlTypes, 'types');
+    }
+
+    componentDidMount() {
+        this.getCategories();
+    }
+
+    inputValue = (name, value) => {
+        this.setState({
+            [name]: value
+        });
+    }
+
+    inputValid = (name, value) => {
+        const inputData = {
+            ...value
+        }
+        if(inputData.required) {
+            const valid = inputData.value.trim() !== '';
+            inputData.errorMessage = valid ? '' : 'To pole jest wymagane';
+            inputData.valid = valid ? true : false;
+        }
+        this.setState({
+            [name]: inputData,
+            formError: false
+        });
+    }
+
     render() {
         return (
             <LayoutDashboard
                 isAdmin={ this.props.userData.isAdmin }
             >
-                <div className="user-nfo-panel-wrapper">                    
-                    <div>
-                        Dodaj produkt
+                <div className="user-nfo-panel-wrapper">
+                    <h3>Dodaj produkt</h3>
+                    <div className="user-nfo-panel">
+                        <form className='add-product-form'>
+                            <Input
+                                id='name'
+                                inputData={ this.state.name }
+                                onChange={ this.inputValue }
+                                onBlur={ this.inputValid }
+                            />
+                            <Input
+                                id='model'
+                                inputData={ this.state.model }
+                                onChange={ this.inputValue }
+                                onBlur={ this.inputValid }
+                            />
+                            <TextArea
+                                id='description'
+                                inputData={ this.state.description }
+                                onChange={ this.inputValue }
+                                onBlur={ this.inputValid }
+                            />
+                            <Input
+                                id='price'
+                                inputData={ this.state.price }
+                                onChange={ this.inputValue }
+                                onBlur={ this.inputValid }
+                            />
+                            <Select
+                                title='Wybierz producenta'
+                                id='manufacturer'
+                                selectData={ this.state.manufacturer }
+                                onChange={ this.inputValue }
+                                onBlur={ this.inputValid }
+                            />
+                            <Select
+                                title='Wybierz materiał'
+                                id='material'
+                                selectData={ this.state.material }
+                                onChange={ this.inputValue }
+                                onBlur={ this.inputValid }
+                            />
+                            <Select
+                                title='Wybierz typ'
+                                id='type'
+                                selectData={ this.state.type }
+                                onChange={ this.inputValue }
+                                onBlur={ this.inputValid }
+                            />
+                            <Select
+                                title='Wybierz przeznaczenie'
+                                id='destiny'
+                                selectData={ this.state.destiny }
+                                onChange={ this.inputValue }
+                                onBlur={ this.inputValid }
+                            />
+                            <Input
+                                id='color'
+                                inputData={ this.state.color }
+                                onChange={ this.inputValue }
+                                onBlur={ this.inputValid }
+                            />
+                            <Input
+                                id='size'
+                                inputData={ this.state.size }
+                                onChange={ this.inputValue }
+                                onBlur={ this.inputValid }
+                            />
+                            <Select
+                                title='Wybierz dostępność'
+                                id='available'
+                                selectData={ this.state.available }
+                                onChange={ this.inputValue }
+                                onBlur={ this.inputValid }
+                            />
+                            <Select
+                                title='Wybierz widoczność'
+                                id='publish'
+                                selectData={ this.state.publish }
+                                onChange={ this.inputValue }
+                                onBlur={ this.inputValid }
+                            />
+                        </form>
                     </div>
                 </div>
             </LayoutDashboard>
