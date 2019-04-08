@@ -4,8 +4,11 @@ import Button from '../Button.jsx';
 
 class Dashboard extends Component {
     render() {
+        console.log(this.props.userData);
         return (
-            <LayoutDashboard>
+            <LayoutDashboard
+                userData={ this.props.userData }
+            >
                 <div className="user-nfo-panel-wrapper">
                     <h3>Informacje o użytkowniku</h3>
                     <div className="user-nfo-panel">

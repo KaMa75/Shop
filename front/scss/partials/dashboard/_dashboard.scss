@@ -28,7 +28,7 @@
     .dashboard-navigation {
         height: 100%;
         background: rgba($color: $colorDark, $alpha: 0.2);
-        width: 25%;
+        width: 35%;
         min-width: 250px;
         padding: 3rem;
         ul {
@@ -45,6 +45,13 @@
             &:hover {
                 color: $colorHoverMenu;
             }
+        }
+    }
+    .dash-admin-nav {
+        margin-top: 3rem;
+        h3 {
+            padding-top: 1.5rem;
+            // border-top: 2px solid $colorDark;
         }
     }
 }

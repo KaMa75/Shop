@@ -23,8 +23,8 @@ const Routes = (props) => {
                         <Redirect to='/login' />
                         ) : (
                             <Dashboard
-                            userData={ userData }
-                            setAppState={ setAppState }
+                                userData={ userData }
+                                setAppState={ setAppState }
                             />
                             )
                 )} />

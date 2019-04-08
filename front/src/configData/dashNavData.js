@@ -12,3 +12,18 @@ export const dashUserNav = [
         link: '/user/cart'
     }
 ];
+
+export const dashAdminNav = [
+    {
+        name: 'Informacje',
+        link: '/admin/info'
+    },
+    {
+        name: 'Dodaj produkt',
+        link: '/admin/add_product'
+    },
+    {
+        name: 'Kategorie',
+        link: '/admin/manage_categories'
+    }
+];
