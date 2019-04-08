@@ -3,6 +3,7 @@ import LayoutDashboard from '../LayoutDashboard.jsx';
 import Input from '../Input.jsx';
 import TextArea from '../TextArea.jsx';
 import Select from '../Select.jsx';
+import axios from 'axios';
 
 const urlManufacturers = '/api/product/manufacturers';
 const urlMaterials = '/api/product/materials';
@@ -115,7 +116,17 @@ class AddProduct extends Component {
         }
     }
 
+    renameOptionsKeys(array) {
+        return array.map( (item) => {
+            return {
+                key: item._id,
+                value: item.name
+            }
+        });
+    }
+
     getData(url, stateName) {
+        let stateData = this.state[stateName];
         axios.get(url)
             .then(response => {
                 if(response.status === 200) {
@@ -125,8 +136,9 @@ class AddProduct extends Component {
                 }
             })
             .then(response => {
+                stateData.options = this.renameOptionsKeys(response);
                 this.setState({
-                    [stateName]: response
+                    [stateName]: stateData
                 });
             })
             .catch(error => {
@@ -135,22 +147,18 @@ class AddProduct extends Component {
     }
 
     getCategories() {
-        // this.getData(urlManufacturers, 'manufacturers');
-        // this.getData(urlMaterials, 'materials');
-        // this.getData(urlDestinys, 'destinys');
-        // this.getData(urlTypes, 'types');
+        this.getData(urlManufacturers, 'manufacturer');
+        this.getData(urlMaterials, 'material');
+        this.getData(urlDestinys, 'destiny');
+        this.getData(urlTypes, 'type');
     }
-
-    componentDidMount() {
-        this.getCategories();
-    }
-
+    
     inputValue = (name, value) => {
         this.setState({
             [name]: value
         });
     }
-
+    
     inputValid = (name, value) => {
         const inputData = {
             ...value
@@ -164,6 +172,14 @@ class AddProduct extends Component {
             [name]: inputData,
             formError: false
         });
+    }
+    
+    submitData = () => {
+        console.log('dodaj')
+    }
+    
+    componentDidMount() {
+        this.getCategories();
     }
 
     render() {
@@ -253,6 +269,16 @@ class AddProduct extends Component {
                                 onChange={ this.inputValue }
                                 onBlur={ this.inputValid }
                             />
+                            { this.state.formError && (
+                                <div className="error-msg">
+                                    <p>{ this.state.errorMsg }</p>
+                                </div>
+                            )}
+                            <button
+                                onClick={ this.submitData }
+                            >
+                                Dodaj produkt
+                            </button>
                         </form>
                     </div>
                 </div>
