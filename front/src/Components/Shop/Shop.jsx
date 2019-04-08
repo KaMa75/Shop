@@ -55,19 +55,10 @@ class Shop extends Component {
         });
     }
 
-    getManufacturers() {
+    getFiltersCategories() {
         this.getData(urlManufacturers, 'manufacturers');
-    }
-
-    getMaterials() {
         this.getData(urlMaterials, 'materials');
-    }
-
-    getDestinys() {
         this.getData(urlDestinys, 'destinys');
-    }
-
-    getTypes() {
         this.getData(urlTypes, 'types');
     }
 
@@ -132,10 +123,7 @@ class Shop extends Component {
     }
 
     componentDidMount() {
-        this.getManufacturers();
-        this.getMaterials();
-        this.getDestinys();
-        this.getTypes();
+        this.getFiltersCategories();
         this.getProducts();
     }
 
