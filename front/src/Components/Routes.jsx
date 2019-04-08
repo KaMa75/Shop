@@ -7,6 +7,9 @@ import Login from './Register_login/Login.jsx';
 import Logout from './Logout.jsx';
 import Dashboard from './Dashboard/Dashboard.jsx';
 import Shop from './Shop/Shop.jsx';
+import AdminInfo from './Dashboard/AdminInfo.jsx';
+import AddProduct from './Dashboard/AddProduct.jsx';
+import ManageCategories from './Dashboard/ManageCategories.jsx';
 
 const Routes = (props) => {
     const {userData, setAppState} = props;
@@ -26,7 +29,7 @@ const Routes = (props) => {
                                 userData={ userData }
                                 setAppState={ setAppState }
                             />
-                            )
+                        )
                 )} />
                 <Route exact path='/user/logout' render={ () => (
                     !userData.isAuth ? (
@@ -34,6 +37,33 @@ const Routes = (props) => {
                     ) : (
                         <Logout
                             setAppState={ setAppState }
+                        />
+                    )
+                )} />
+                <Route exact path='/admin/info' render={ () => (
+                    !userData.isAdmin ? (
+                        <Redirect to='/' />
+                    ) : (
+                        <AdminInfo
+                            userData={ userData }
+                        />
+                    )
+                )} />
+                <Route exact path='/admin/add_product' render={ () => (
+                    !userData.isAdmin ? (
+                        <Redirect to='/' />
+                    ) : (
+                        <AddProduct
+                            userData={ userData }
+                        />
+                    )
+                )} />
+                <Route exact path='/admin/manage_categories' render={ () => (
+                    !userData.isAdmin ? (
+                        <Redirect to='/' />
+                    ) : (
+                        <ManageCategories
+                            userData={ userData }
                         />
                     )
                 )} />

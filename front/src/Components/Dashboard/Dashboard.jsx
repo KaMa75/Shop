@@ -7,7 +7,7 @@ class Dashboard extends Component {
         console.log(this.props.userData);
         return (
             <LayoutDashboard
-                userData={ this.props.userData }
+                isAdmin={ this.props.userData.isAdmin }
             >
                 <div className="user-nfo-panel-wrapper">
                     <h3>Informacje o użytkowniku</h3>

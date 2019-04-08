@@ -4,7 +4,7 @@ import { dashUserNav, dashAdminNav } from '../configData/dashNavData';
 
 class LayoutDashboard extends Component {
     showIfAdmin() {
-        return this.props.userData.isAdmin ? (
+        return this.props.isAdmin ? (
             <div className="dash-admin-nav">
                 <h3>
                     Panel administratora
