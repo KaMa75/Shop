@@ -27,7 +27,25 @@ const Routes = (props) => {
                         ) : (
                             <Dashboard
                                 userData={ userData }
-                                setAppState={ setAppState }
+                                // setAppState={ setAppState }
+                            />
+                        )
+                )} />
+                <Route exact path='/user/user_profile' render={ () => (
+                    !userData.isAuth ? (
+                        <Redirect to='/login' />
+                        ) : (
+                            <Dashboard
+                                userData={ userData }
+                            />
+                        )
+                )} />
+                <Route exact path='/user/cart' render={ () => (
+                    !userData.isAuth ? (
+                        <Redirect to='/login' />
+                        ) : (
+                            <Dashboard
+                                userData={ userData }
                             />
                         )
                 )} />
