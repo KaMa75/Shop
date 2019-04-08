@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import Button from '../Button.jsx';
-import Input from './Input.jsx';
+import Input from '../Input.jsx';
 
 const urlLogin = '/api/users/login';
 const urlAuth = '/api/users/auth';

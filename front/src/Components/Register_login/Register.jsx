@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Input from './Input.jsx';
+import Input from '../Input.jsx';
 import RegisterPopup from './RegisterPopup.jsx';
 
 const urlLogin = '/api/users/register';
