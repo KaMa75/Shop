@@ -161,7 +161,6 @@ class AddProduct extends Component {
             ...value
         }
         inputData.errorMessage = '';
-        inputData.errorMessage = '';
         inputData.formError = false;
         inputData.errorMsg = '';
         inputData.formSuccess = false;
@@ -204,7 +203,17 @@ class AddProduct extends Component {
     }
 
     resetForm() {
-        
+        const stateData = this.state;
+        for(let key in stateData) {
+            if(stateData[key].value) {
+                const data = { ...stateData[key] };
+                data.value = '';
+                data.valid = false;
+                this.setState({
+                    [key]: data
+                });
+            }
+        }
     }
     
     addProduct = () => {
@@ -235,6 +244,7 @@ class AddProduct extends Component {
                         formSuccess: response.success,
                         successMsg: 'Produkt dodany'
                     });
+                    this.resetForm();
                 } else {
                     this.setState({
                         formError: !response.success,
