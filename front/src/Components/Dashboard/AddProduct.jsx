@@ -10,6 +10,8 @@ const urlMaterials = '/api/product/materials';
 const urlDestinys = '/api/product/destinys';
 const urlTypes = '/api/product/types';
 
+const urlAddProduct = '/api/product/article';
+
 class AddProduct extends Component {
 
     constructor(props) {
@@ -112,7 +114,8 @@ class AddProduct extends Component {
             },
             formError: false,
             errorMsg: '',
-            showPopUp: false
+            formSuccess: false,
+            successMsg: ''
         }
     }
 
@@ -173,9 +176,63 @@ class AddProduct extends Component {
             formError: false
         });
     }
+
+    getDataToSubmit() {
+        return {
+            name: this.state.name.value,
+            model: this.state.model.value,
+            description: this.state.description.value,
+            price: this.state.price.value,
+            manufacturer: this.state.manufacturer.value,
+            material: this.state.material.value,
+            type: this.state.type.value,
+            destiny: this.state.destiny.value,
+            color: this.state.color.value,
+            size: this.state.name.value,
+            available: this.state.available.value,
+            publish: this.state.publish.value
+        }
+    }
     
-    submitData = () => {
-        console.log('dodaj')
+    addProduct = () => {
+        const dataToSubmit = this.getDataToSubmit();
+        let formError = this.state.formError;
+        for(let key in dataToSubmit) {
+            if (!this.state[key].valid) {
+                formError = true;
+                this.setState({
+                    formError: formError,
+                    errorMsg: 'Nieprawidłowe dane.'
+                });
+            }
+        }
+        if(!formError) {
+            axios.post(urlAddProduct, dataToSubmit)
+            .then(response => {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    throw new Error('Błąd połączenia');
+                }
+            })
+            .then(response => {
+                console.log(response.success);
+                if(response.success) {
+                    this.setState({
+                        formSuccess: response.success,
+                        successMsg: 'Produkt dodany'
+                    });
+                } else {
+                    this.setState({
+                        formError: !response.success,
+                        errorMsg: 'Wystąpił błąd. Nie udało się dodać produktu'
+                    });
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
     }
     
     componentDidMount() {
@@ -269,13 +326,18 @@ class AddProduct extends Component {
                                 onChange={ this.inputValue }
                                 onBlur={ this.inputValid }
                             />
+                            { this.state.formSuccess && (
+                                <div className="success-msg">
+                                    <p>{ this.state.successMsg }</p>
+                                </div>
+                            )}
                             { this.state.formError && (
                                 <div className="error-msg">
                                     <p>{ this.state.errorMsg }</p>
                                 </div>
                             )}
                             <button
-                                onClick={ this.submitData }
+                                onClick={ this.addProduct }
                             >
                                 Dodaj produkt
                             </button>

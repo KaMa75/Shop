@@ -36,8 +36,6 @@ class Select extends Component {
     }
 
     render() {
-        console.log(this.props.id);
-        console.log(this.props.selectData);
         const {valid, errorMessage } = this.props.selectData;
         return (
             <div className="select">
