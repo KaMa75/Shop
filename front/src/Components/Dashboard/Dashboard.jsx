@@ -4,6 +4,7 @@ import Button from '../Button.jsx';
 
 class Dashboard extends Component {
     render() {
+        const {name, lastName, street, houseNumber, postCode, city, email, phone} = this.props.userData;
         console.log(this.props.userData);
         return (
             <LayoutDashboard
@@ -12,9 +13,11 @@ class Dashboard extends Component {
                 <div className="user-nfo-panel-wrapper">
                     <h3>Informacje o użytkowniku</h3>
                     <div className="user-nfo-panel">
-                        <p>name</p>
-                        <p>lastname</p>
-                        <p>email</p>
+                        <p>{ `${name} ${lastName}` }</p>
+                        <p>{ `ul. ${street} ${houseNumber}` }</p>
+                        <p>{ `${postCode} ${city}` }</p>
+                        <p>{ `e-mail: ${email}` }</p>
+                        <p>{ `telefon: ${phone}` }</p>
                         <Button
                             linkTo='/user/user_profile'
                         >

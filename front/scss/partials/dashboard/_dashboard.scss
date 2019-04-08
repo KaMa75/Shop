@@ -12,6 +12,10 @@
     .user-nfo-panel {
         padding: 2rem;
         background-color: $colorLightText;
+        p {
+            font-family: $fontSecond;
+            padding: 2px 0;
+        }
         button {
             margin-top: 2rem;
         }
