@@ -8,7 +8,6 @@ class Select extends Component {
                 ...this.props.selectData
             };
             selectData.value = event.target.value;
-            selectData.errorMessage = '';
             this.props.onChange(this.props.id, selectData);
         }
     }

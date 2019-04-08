@@ -8,7 +8,6 @@ class TextArea extends Component {
                 ...this.props.inputData
             };
             inputData.value = event.target.value;
-            inputData.errorMessage = '';
             this.props.onChange(this.props.id, inputData);
         }
     }

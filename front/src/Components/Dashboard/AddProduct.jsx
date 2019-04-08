@@ -157,6 +157,15 @@ class AddProduct extends Component {
     }
     
     inputValue = (name, value) => {
+        const inputData = {
+            ...value
+        }
+        inputData.errorMessage = '';
+        inputData.errorMessage = '';
+        inputData.formError = false;
+        inputData.errorMsg = '';
+        inputData.formSuccess = false;
+        inputData.successMsg = '';
         this.setState({
             [name]: value
         });
@@ -192,6 +201,10 @@ class AddProduct extends Component {
             available: this.state.available.value,
             publish: this.state.publish.value
         }
+    }
+
+    resetForm() {
+        
     }
     
     addProduct = () => {
