@@ -60,7 +60,7 @@ const Routes = (props) => {
                 )} />
                 <Route exact path='/admin/info' render={ () => (
                     !userData.isAdmin ? (
-                        <Redirect to='/' />
+                        <Redirect to='/login' />
                     ) : (
                         <AdminInfo
                             userData={ userData }
@@ -69,7 +69,7 @@ const Routes = (props) => {
                 )} />
                 <Route exact path='/admin/add_product' render={ () => (
                     !userData.isAdmin ? (
-                        <Redirect to='/' />
+                        <Redirect to='/login' />
                     ) : (
                         <AddProduct
                             userData={ userData }
@@ -78,7 +78,7 @@ const Routes = (props) => {
                 )} />
                 <Route exact path='/admin/manage_categories' render={ () => (
                     !userData.isAdmin ? (
-                        <Redirect to='/' />
+                        <Redirect to='/login' />
                     ) : (
                         <ManageCategories
                             userData={ userData }
