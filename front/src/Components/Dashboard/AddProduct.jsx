@@ -238,7 +238,6 @@ class AddProduct extends Component {
                 }
             })
             .then(response => {
-                console.log(response.success);
                 if(response.success) {
                     this.setState({
                         formSuccess: response.success,
