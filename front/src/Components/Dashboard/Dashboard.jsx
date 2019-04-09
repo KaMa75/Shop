@@ -5,7 +5,6 @@ import Button from '../Button.jsx';
 class Dashboard extends Component {
     render() {
         const {name, lastName, street, houseNumber, postCode, city, email, phone} = this.props.userData;
-        console.log(this.props.userData);
         return (
             <LayoutDashboard
                 isAdmin={ this.props.userData.isAdmin }
