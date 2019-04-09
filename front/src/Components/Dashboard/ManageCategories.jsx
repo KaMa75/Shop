@@ -20,6 +20,16 @@ class ManageCategories extends Component {
         }
     }
 
+    addToCategoryList = (value, name) => {
+        const categoryList = [
+            ...this.state[name],
+            value
+        ];
+        this.setState({
+            [name]: categoryList
+        });
+    }
+
     getData(url, stateName) {
         axios.get(url)
             .then(response => {
@@ -51,7 +61,6 @@ class ManageCategories extends Component {
     }
 
     render() {
-        console.log(this.state)
         return (
             <LayoutDashboard
                 isAdmin={ this.props.userData.isAdmin }
@@ -61,23 +70,27 @@ class ManageCategories extends Component {
                     <div className="user-nfo-panel">
                         <ManageCategory
                             title='Producent'
-                            id='manufacturer'
+                            category='manufacturer'
                             list={ this.state.manufacturers }
+                            addToCategoryList={ (value) => this.addToCategoryList(value, 'manufacturers') }
                         />
                         <ManageCategory
                             title='Materiał'
-                            id='material'
+                            category='material'
                             list={ this.state.materials }
+                            addToCategoryList={ (value) => this.addToCategoryList(value, 'materials') }
                         />
                         <ManageCategory
                             title='Przeznaczenie'
-                            id='destiny'
+                            category='destiny'
                             list={ this.state.destinys }
+                            addToCategoryList={ (value) => this.addToCategoryList(value, 'destinys') }
                         />
                         <ManageCategory
                             title='Typ'
-                            id='type'
+                            category='type'
                             list={ this.state.types }
+                            addToCategoryList={ (value) => this.addToCategoryList(value, 'types') }
                         />
                     </div>
                 </div>
