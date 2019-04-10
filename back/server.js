@@ -52,6 +52,8 @@ app.post('/api/product/shop', (request, response) => {
         }
     }
 
+    findArgs['publish'] = true;
+
     Product
     .find(findArgs)
     .populate('manufacturer')
