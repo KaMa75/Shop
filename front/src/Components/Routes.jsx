@@ -12,7 +12,7 @@ import AddProduct from './Dashboard/AddProduct.jsx';
 import ManageCategories from './Dashboard/ManageCategories.jsx';
 
 const Routes = (props) => {
-    const {userData, setAppState} = props;
+    const {userData, categoriesData, setAppState} = props;
     return (
         <Layout
             loggedIn={ userData.isAuth }
@@ -20,14 +20,17 @@ const Routes = (props) => {
             <Switch>
                 <Route exact path='/' component={ MainPage } />
                 <Route exact path='/register' component={ Register } />
-                <Route exact path='/shop' component={ Shop } />
+                <Route exact path='/shop' render={ () => (
+                    <Shop
+                        categoriesData={ categoriesData }
+                    />
+                )} />
                 <Route exact path='/user/dashboard' render={ () => (
                     !userData.isAuth ? (
                         <Redirect to='/login' />
                         ) : (
                             <Dashboard
                                 userData={ userData }
-                                // setAppState={ setAppState }
                             />
                         )
                 )} />

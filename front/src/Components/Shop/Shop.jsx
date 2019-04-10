@@ -7,10 +7,6 @@ import axios from 'axios';
 import { price } from '../../configData/priceFilters';
 import { initRequestSettings } from '../../configData/shopRequestSettings';
 
-const urlManufacturers = '/api/product/manufacturers';
-const urlMaterials = '/api/product/materials';
-const urlDestinys = '/api/product/destinys';
-const urlTypes = '/api/product/types';
 const urlShopProducts = '/api/product/shop';
 
 class Shop extends Component {
@@ -18,10 +14,6 @@ class Shop extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            manufacturers: [],
-            materials: [],
-            destinys: [],
-            types: [],
             filters: {
                 manufacturers: [],
                 materials: [],
@@ -34,32 +26,6 @@ class Shop extends Component {
             showLoadMoreBtn: false,
             productsIsLoaded: false
         }
-    }
-
-    getData(url, stateName) {
-        axios.get(url)
-            .then(response => {
-                if(response.status === 200) {
-                    return response.data;
-                } else {
-                    throw new Error('Błąd połączenia');
-                }
-            })
-            .then(response => {
-                this.setState({
-                    [stateName]: response
-                });
-            })
-            .catch(error => {
-                console.log(error);
-        });
-    }
-
-    getFiltersCategories() {
-        this.getData(urlManufacturers, 'manufacturers');
-        this.getData(urlMaterials, 'materials');
-        this.getData(urlDestinys, 'destinys');
-        this.getData(urlTypes, 'types');
     }
 
     getProducts(resetProducts=true) {
@@ -123,7 +89,6 @@ class Shop extends Component {
     }
 
     componentDidMount() {
-        this.getFiltersCategories();
         this.getProducts();
     }
 
@@ -155,6 +120,8 @@ class Shop extends Component {
     }
 
     render() {
+        const categories = { ...this.props.categoriesData };
+        console.log(categories);
         return (
             <div className='shop-page'>
                 <ShopPageTop>
@@ -164,10 +131,10 @@ class Shop extends Component {
                     <div className="shop-wrapper">
                         <FiltersSection
                             handleFilters={ this.handleFilters }
-                            manufacturers={ this.state.manufacturers }
-                            materials={ this.state.materials }
-                            destinys={ this.state.destinys }
-                            types={ this.state.types }
+                            manufacturers={ categories.manufacturers }
+                            materials={ categories.materials }
+                            destinys={ categories.destinys }
+                            types={ categories.types }
                             price={ price }
                         />
                         <div className="shop-products">
