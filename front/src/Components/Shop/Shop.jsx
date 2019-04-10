@@ -32,19 +32,7 @@ class Shop extends Component {
         this.setState({
             productsIsLoaded: false
         });
-        // const {
-        //     manufacturers: manufacturer,
-        //     materials: material,
-        //     destinys: destiny,
-        //     types: type,
-        //     price
-        // } = this.state.filters;
         const filters = {
-            // manufacturer,
-            // material,
-            // destiny,
-            // type,
-            // price
             ...this.state.filters
         }
         const settings = {
