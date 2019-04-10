@@ -2,10 +2,10 @@ import React from 'react';
 
 const ProductInfo = (props) => {
     const data = props.data;
-    console.log(data)
     if(!data.name) {
         return null;
     };
+    console.log(data.price.toFixed(2))
     return (
         <div>
             <section>
@@ -77,7 +77,7 @@ const ProductInfo = (props) => {
                 </div>
                 <div className="column">
                     <h2>
-                        { `${data.price} zł` }
+                        { `${data.price.toFixed(2)} zł` }
                     </h2>
                     <button
                         onClick={ props.addToBasket(data._id) }
