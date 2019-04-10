@@ -15,10 +15,10 @@ class Shop extends Component {
         super(props);
         this.state = {
             filters: {
-                manufacturers: [],
-                materials: [],
-                destinys: [],
-                types: [],
+                manufacturer: [],
+                material: [],
+                destiny: [],
+                type: [],
                 price: []
             },
             reqSet: initRequestSettings,
@@ -32,19 +32,20 @@ class Shop extends Component {
         this.setState({
             productsIsLoaded: false
         });
-        const {
-            manufacturers: manufacturer,
-            materials: material,
-            destinys: destiny,
-            types: type,
-            price
-        } = this.state.filters;
+        // const {
+        //     manufacturers: manufacturer,
+        //     materials: material,
+        //     destinys: destiny,
+        //     types: type,
+        //     price
+        // } = this.state.filters;
         const filters = {
-            manufacturer,
-            material,
-            destiny,
-            type,
-            price
+            // manufacturer,
+            // material,
+            // destiny,
+            // type,
+            // price
+            ...this.state.filters
         }
         const settings = {
             ...this.state.reqSet,
@@ -121,7 +122,6 @@ class Shop extends Component {
 
     render() {
         const categories = { ...this.props.categoriesData };
-        console.log(categories);
         return (
             <div className='shop-page'>
                 <ShopPageTop>

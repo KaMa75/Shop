@@ -11,7 +11,7 @@ const FiltersSection = (props) => {
                     open={ true }
                     title='Producent'
                     list={ manufacturers }
-                    handleFilters={ (filters) => handleFilters(filters, 'manufacturers') }
+                    handleFilters={ (filters) => handleFilters(filters, 'manufacturer') }
                 />
             ) }
             { (materials.length > 0) && (
@@ -19,7 +19,7 @@ const FiltersSection = (props) => {
                     open={ false }
                     title='Materiał'
                     list={ materials }
-                    handleFilters={ (filters) => handleFilters(filters, 'materials') }
+                    handleFilters={ (filters) => handleFilters(filters, 'material') }
                 />
             ) }
             { (destinys.length > 0) && (
@@ -27,7 +27,7 @@ const FiltersSection = (props) => {
                     open={ false }
                     title='Przeznaczenie'
                     list={ destinys }
-                    handleFilters={ (filters) => handleFilters(filters, 'destinys') }
+                    handleFilters={ (filters) => handleFilters(filters, 'destiny') }
                 />
             ) }
             { (types.length > 0) && (
@@ -35,7 +35,7 @@ const FiltersSection = (props) => {
                     open={ false }
                     title='Typ'
                     list={ types }
-                    handleFilters={ (filters) => handleFilters(filters, 'types') }
+                    handleFilters={ (filters) => handleFilters(filters, 'type') }
                 />
             ) }
             { (price.length > 0) && (
