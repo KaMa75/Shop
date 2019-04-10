@@ -11,7 +11,7 @@ class ManageCategory extends Component {
         this.state = {
             name: {
                 type: 'text',
-                placeholder: 'Producent',
+                placeholder: this.props.title,
                 value: '',
                 required: false,
                 valid: false,
@@ -131,33 +131,37 @@ class ManageCategory extends Component {
         return (
             <div className='manage-category-wrapper'>
                 <h4>{ this.props.title }</h4>
-                <div className="category-list">
-                    <ul>
-                        { this.genCategoryList() }
-                    </ul>
+                <div className="category-container clear-fix">
+                    <div className="category-list">
+                        <ul>
+                            { this.genCategoryList() }
+                        </ul>
+                    </div>
+                    <div className='add-to-category'>
+                        <form>
+                            <Input
+                                id={ this.props.category }
+                                inputData={ this.state.name }
+                                onChange={ this.inputValue }
+                            />
+                            { this.state.formSuccess && (
+                                <div className="success-msg">
+                                    <p>{ this.state.successMsg }</p>
+                                </div>
+                            )}
+                            { this.state.formError && (
+                                <div className="error-msg">
+                                    <p>{ this.state.errorMsg }</p>
+                                </div>
+                            )}
+                            <button
+                                onClick={ this.addToCategory }
+                            >
+                                Dodaj
+                            </button>
+                        </form>
+                    </div>
                 </div>
-                <form className='add-to-category'>
-                    <Input
-                        id={ this.props.category }
-                        inputData={ this.state.name }
-                        onChange={ this.inputValue }
-                    />
-                    { this.state.formSuccess && (
-                        <div className="success-msg">
-                            <p>{ this.state.successMsg }</p>
-                        </div>
-                    )}
-                    { this.state.formError && (
-                        <div className="error-msg">
-                            <p>{ this.state.errorMsg }</p>
-                        </div>
-                    )}
-                    <button
-                        onClick={ this.addToCategory }
-                    >
-                        Dodaj
-                    </button>
-                </form>
             </div>
         );
     }
