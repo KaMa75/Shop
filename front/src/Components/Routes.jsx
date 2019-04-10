@@ -7,6 +7,7 @@ import Login from './Register_login/Login.jsx';
 import Logout from './Logout.jsx';
 import Dashboard from './Dashboard/Dashboard.jsx';
 import Shop from './Shop/Shop.jsx';
+import ProductDetail from './Shop/ProductDetail.jsx';
 import AdminInfo from './Dashboard/AdminInfo.jsx';
 import AddProduct from './Dashboard/AddProduct.jsx';
 import ManageCategories from './Dashboard/ManageCategories.jsx';
@@ -26,6 +27,7 @@ const Routes = (props) => {
                         categoriesData={ categoriesData }
                     />
                 )} />
+                <Route exact path='/product_details/:id' component={ ProductDetail } />
                 <Route exact path='/user/dashboard' render={ () => (
                     !userData.isAuth ? (
                         <Redirect to='/login' />
