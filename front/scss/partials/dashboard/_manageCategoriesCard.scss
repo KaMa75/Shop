@@ -1,0 +1,36 @@
+.manage-category-wrapper {
+    .category-container {
+        border-top: 1px solid #2b252c;
+        border-bottom: 2px solid #2b252c;
+        margin-top: 1.5rem;
+        padding: 2rem 0;
+    }
+    h4:nth-of-type(2n + 1) {
+        margin-top: 2rem;
+    }
+    .category-list {
+        width: 50%;
+        float: left;
+        ul {
+            list-style: none;
+            border-top-width: 0;
+            margin-top: 0;
+            padding-top: 0;
+            li {
+                padding: 2px 0;
+            }
+        }
+    }
+    .add-to-category {
+        width: 50%;
+        float: left;
+        .input {
+            margin-bottom: 0;
+        }
+        button {
+            margin-top: 0.5rem;
+            padding-top: 0.6rem;
+            padding-bottom: 0.6rem;
+        }
+    }
+}
