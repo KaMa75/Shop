@@ -8,6 +8,7 @@ class Layout extends Component {
             <div>
                 <Header
                     loggedIn={ this.props.loggedIn }
+                    typesForMenu={ this.props.typesForMenu }
                 />
                     { this.props.children }
                 <Footer />

@@ -91,8 +91,6 @@ class App extends Component {
 
     render() {
 
-        console.log(this.state.categories);
-
         if(this.state.isLoaded) {
             return (
                 <HashRouter>

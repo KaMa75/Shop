@@ -36,17 +36,17 @@ export const mainNav = [
     {
         name: 'Sklep',
         link: '/shop'
-    },
-    {
-        name: 'Damskie',
-        link: '#'
-    },
-    {
-        name: 'Męskie',
-        link: '#'
-    },
-    {
-        name: 'Dziecięce',
-        link: '#'
-    }
+    } //,
+    // {
+    //     name: 'Damskie',
+    //     link: '#'
+    // },
+    // {
+    //     name: 'Męskie',
+    //     link: '#'
+    // },
+    // {
+    //     name: 'Dziecięce',
+    //     link: '#'
+    // }
 ];

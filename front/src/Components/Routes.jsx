@@ -16,6 +16,7 @@ const Routes = (props) => {
     return (
         <Layout
             loggedIn={ userData.isAuth }
+            typesForMenu={ categoriesData.types }
         >
             <Switch>
                 <Route exact path='/' component={ MainPage } />
