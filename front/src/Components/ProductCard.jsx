@@ -25,7 +25,7 @@ class ProductCard extends Component {
                     <h4>{ this.props.name }</h4>
                     <h2>{ this.props.manufacturer.name }</h2>
                     <h4>{ this.props.model }</h4>
-                    <h2>{ `${this.props.price} zł` }</h2>
+                    <h2>{ `${this.props.price.toFixed(2)} zł` }</h2>
                 </div>
                 <div className="product-card-buttons">
                     <Button
