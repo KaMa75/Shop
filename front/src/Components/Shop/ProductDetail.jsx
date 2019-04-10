@@ -45,7 +45,6 @@ class ProductDetail extends Component {
     }
 
     render() {
-        console.log(this.state.product.description)
         return (
             <div className='shop-page'>
                 <ShopPageTop>
