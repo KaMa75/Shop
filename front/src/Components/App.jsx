@@ -91,6 +91,14 @@ class App extends Component {
         }));
     }
 
+    addToCategoryList = (value, name) => {
+        const categories = this.state.categories;
+        categories[name] = [...categories[name], value];
+        this.setState({
+            categories
+        });
+    }
+
     componentDidMount() {
         this.userAuth();
         this.getCategories();
@@ -104,6 +112,7 @@ class App extends Component {
                         userData={ this.state.user }
                         categoriesData={ this.state.categories }
                         setAppState={ this.setAppState }
+                        addToCategoryList={ this.addToCategoryList }
                     />
                 </HashRouter>
             );

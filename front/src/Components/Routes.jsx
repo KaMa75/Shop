@@ -13,7 +13,7 @@ import AddProduct from './Dashboard/AddProduct.jsx';
 import ManageCategories from './Dashboard/ManageCategories.jsx';
 
 const Routes = (props) => {
-    const {userData, categoriesData, setAppState} = props;
+    const {userData, categoriesData, addToCategoryList, setAppState} = props;
     return (
         <Layout
             loggedIn={ userData.isAuth }
@@ -91,6 +91,8 @@ const Routes = (props) => {
                     ) : (
                         <ManageCategories
                             userData={ userData }
+                            categoriesData={ categoriesData }
+                            addToCategoryList={ addToCategoryList }
                         />
                     )
                 )} />
