@@ -77,9 +77,12 @@ const Routes = (props) => {
                     !userData.isAdmin ? (
                         <Redirect to='/login' />
                     ) : (
-                        <AddProduct
-                            userData={ userData }
-                        />
+                        categoriesData.isLoaded && (
+                            <AddProduct
+                                userData={ userData }
+                                categoriesData={ categoriesData }
+                            />
+                        )
                     )
                 )} />
                 <Route exact path='/admin/manage_categories' render={ () => (

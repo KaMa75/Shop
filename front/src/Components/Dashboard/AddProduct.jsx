@@ -119,7 +119,7 @@ class AddProduct extends Component {
         }
     }
 
-    renameOptionsKeys(array) {
+    setOptionsKeyAndValue(array) {
         return array.map( (item) => {
             return {
                 key: item._id,
@@ -128,32 +128,22 @@ class AddProduct extends Component {
         });
     }
 
-    getData(url, stateName) {
-        let stateData = this.state[stateName];
-        axios.get(url)
-            .then(response => {
-                if(response.status === 200) {
-                    return response.data;
-                } else {
-                    throw new Error('Błąd połączenia');
-                }
-            })
-            .then(response => {
-                stateData.options = this.renameOptionsKeys(response);
-                this.setState({
-                    [stateName]: stateData
-                });
-            })
-            .catch(error => {
-                console.log(error);
+    setCategoriesOptions() {
+        const categories = { ...this.props.categoriesData };
+        const manufacturer = this.state.manufacturer;
+        const material = this.state.material;
+        const type = this.state.type;
+        const destiny = this.state.destiny;
+        manufacturer.options = this.setOptionsKeyAndValue(categories.manufacturers);
+        material.options = this.setOptionsKeyAndValue(categories.materials);
+        type.options = this.setOptionsKeyAndValue(categories.types);
+        destiny.options = this.setOptionsKeyAndValue(categories.destinys);
+        this.setState({
+            manufacturer,
+            material,
+            type,
+            destiny
         });
-    }
-
-    getCategories() {
-        this.getData(urlManufacturers, 'manufacturer');
-        this.getData(urlMaterials, 'material');
-        this.getData(urlDestinys, 'destiny');
-        this.getData(urlTypes, 'type');
     }
     
     inputValue = (name, value) => {
@@ -258,7 +248,107 @@ class AddProduct extends Component {
     }
     
     componentDidMount() {
-        this.getCategories();
+        this.setCategoriesOptions();
+    }
+
+    renderForm() {
+        return (
+            <form className='add-product-form'>
+                <Input
+                    id='name'
+                    inputData={ this.state.name }
+                    onChange={ this.inputValue }
+                    onBlur={ this.inputValid }
+                />
+                <Input
+                    id='model'
+                    inputData={ this.state.model }
+                    onChange={ this.inputValue }
+                    onBlur={ this.inputValid }
+                />
+                <TextArea
+                    id='description'
+                    inputData={ this.state.description }
+                    onChange={ this.inputValue }
+                    onBlur={ this.inputValid }
+                />
+                <Input
+                    id='price'
+                    inputData={ this.state.price }
+                    onChange={ this.inputValue }
+                    onBlur={ this.inputValid }
+                />
+                <Select
+                    title='Wybierz producenta'
+                    id='manufacturer'
+                    selectData={ this.state.manufacturer }
+                    onChange={ this.inputValue }
+                    onBlur={ this.inputValid }
+                />
+                <Select
+                    title='Wybierz materiał'
+                    id='material'
+                    selectData={ this.state.material }
+                    onChange={ this.inputValue }
+                    onBlur={ this.inputValid }
+                />
+                <Select
+                    title='Wybierz typ'
+                    id='type'
+                    selectData={ this.state.type }
+                    onChange={ this.inputValue }
+                    onBlur={ this.inputValid }
+                />
+                <Select
+                    title='Wybierz przeznaczenie'
+                    id='destiny'
+                    selectData={ this.state.destiny }
+                    onChange={ this.inputValue }
+                    onBlur={ this.inputValid }
+                />
+                <Input
+                    id='color'
+                    inputData={ this.state.color }
+                    onChange={ this.inputValue }
+                    onBlur={ this.inputValid }
+                />
+                <Input
+                    id='size'
+                    inputData={ this.state.size }
+                    onChange={ this.inputValue }
+                    onBlur={ this.inputValid }
+                />
+                <Select
+                    title='Wybierz dostępność'
+                    id='available'
+                    selectData={ this.state.available }
+                    onChange={ this.inputValue }
+                    onBlur={ this.inputValid }
+                />
+                <Select
+                    title='Wybierz widoczność'
+                    id='publish'
+                    selectData={ this.state.publish }
+                    onChange={ this.inputValue }
+                    onBlur={ this.inputValid }
+                />
+                { this.state.formSuccess && (
+                    <div className="success-msg">
+                        <p>{ this.state.successMsg }</p>
+                    </div>
+                )}
+                { this.state.formError && (
+                    <div className="error-msg">
+                        <p>{ this.state.errorMsg }</p>
+                    </div>
+                )}
+                <button
+                    onClick={ this.addProduct }
+                >
+                    Dodaj produkt
+                </button>
+            </form>
+        );
     }
 
     render() {
@@ -269,101 +359,7 @@ class AddProduct extends Component {
                 <div className="user-nfo-panel-wrapper">
                     <h3>Dodaj produkt</h3>
                     <div className="user-nfo-panel">
-                        <form className='add-product-form'>
-                            <Input
-                                id='name'
-                                inputData={ this.state.name }
-                                onChange={ this.inputValue }
-                                onBlur={ this.inputValid }
-                            />
-                            <Input
-                                id='model'
-                                inputData={ this.state.model }
-                                onChange={ this.inputValue }
-                                onBlur={ this.inputValid }
-                            />
-                            <TextArea
-                                id='description'
-                                inputData={ this.state.description }
-                                onChange={ this.inputValue }
-                                onBlur={ this.inputValid }
-                            />
-                            <Input
-                                id='price'
-                                inputData={ this.state.price }
-                                onChange={ this.inputValue }
-                                onBlur={ this.inputValid }
-                            />
-                            <Select
-                                title='Wybierz producenta'
-                                id='manufacturer'
-                                selectData={ this.state.manufacturer }
-                                onChange={ this.inputValue }
-                                onBlur={ this.inputValid }
-                            />
-                            <Select
-                                title='Wybierz materiał'
-                                id='material'
-                                selectData={ this.state.material }
-                                onChange={ this.inputValue }
-                                onBlur={ this.inputValid }
-                            />
-                            <Select
-                                title='Wybierz typ'
-                                id='type'
-                                selectData={ this.state.type }
-                                onChange={ this.inputValue }
-                                onBlur={ this.inputValid }
-                            />
-                            <Select
-                                title='Wybierz przeznaczenie'
-                                id='destiny'
-                                selectData={ this.state.destiny }
-                                onChange={ this.inputValue }
-                                onBlur={ this.inputValid }
-                            />
-                            <Input
-                                id='color'
-                                inputData={ this.state.color }
-                                onChange={ this.inputValue }
-                                onBlur={ this.inputValid }
-                            />
-                            <Input
-                                id='size'
-                                inputData={ this.state.size }
-                                onChange={ this.inputValue }
-                                onBlur={ this.inputValid }
-                            />
-                            <Select
-                                title='Wybierz dostępność'
-                                id='available'
-                                selectData={ this.state.available }
-                                onChange={ this.inputValue }
-                                onBlur={ this.inputValid }
-                            />
-                            <Select
-                                title='Wybierz widoczność'
-                                id='publish'
-                                selectData={ this.state.publish }
-                                onChange={ this.inputValue }
-                                onBlur={ this.inputValid }
-                            />
-                            { this.state.formSuccess && (
-                                <div className="success-msg">
-                                    <p>{ this.state.successMsg }</p>
-                                </div>
-                            )}
-                            { this.state.formError && (
-                                <div className="error-msg">
-                                    <p>{ this.state.errorMsg }</p>
-                                </div>
-                            )}
-                            <button
-                                onClick={ this.addProduct }
-                            >
-                                Dodaj produkt
-                            </button>
-                        </form>
+                        { this.props.categoriesData.isLoaded ? this.renderForm() : null }
                     </div>
                 </div>
             </LayoutDashboard>
