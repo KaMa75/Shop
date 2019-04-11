@@ -35,9 +35,9 @@ class ManageCategory extends Component {
         });
     }
 
-    resetMsgs = () => {
-        const timer = setTimeout(() => {
-            clearTimeout(timer);
+    resetMsgs() {
+        this.timer = setTimeout(() => {
+            clearTimeout(this.timer);
             this.setState({
                 formError: false,
                 errorMsg: '',
@@ -63,12 +63,14 @@ class ManageCategory extends Component {
                 }
             });
         }
-        this.setState({
-            formError,
-            errorMsg
-        }, () => {
-            this.resetMsgs();
-        });
+        if(formError) {
+            this.setState({
+                formError,
+                errorMsg
+            }, () => {
+                this.resetMsgs();
+            });
+        }
         return !formError;
     }
 
@@ -125,6 +127,10 @@ class ManageCategory extends Component {
                 { item.name }
             </li>
         ));
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.timer);
     }
 
     render() {
