@@ -20,7 +20,8 @@ class App extends Component {
                 manufacturers: [],
                 materials: [],
                 destinys: [],
-                types: []
+                types: [],
+                isLoaded: false
             },
             user: {
                 isAuth: false,
@@ -56,9 +57,8 @@ class App extends Component {
         });
     }
 
-    getData(url, categoryName) {
-        const newCategoriesData = this.state.categories;
-        axios.get(url)
+    getData(url) {
+        return axios.get(url)
             .then(response => {
                 if(response.status === 200) {
                     return response.data;
@@ -66,22 +66,29 @@ class App extends Component {
                     throw new Error('Błąd połączenia');
                 }
             })
-            .then(response => {
-                newCategoriesData[categoryName] = response;
-                this.setState({
-                    categories: newCategoriesData
-                });
-            })
             .catch(error => {
                 console.log(error);
         });
     }
 
     getCategories() {
-        this.getData(urlManufacturers, 'manufacturers');
-        this.getData(urlMaterials, 'materials');
-        this.getData(urlDestinys, 'destinys');
-        this.getData(urlTypes, 'types');
+        let manufacturers = this.getData(urlManufacturers);
+        let materials = this.getData(urlMaterials);
+        let destinys = this.getData(urlDestinys);
+        let types = this.getData(urlTypes);
+        axios.all([manufacturers, materials, destinys, types])
+        .then(axios.spread((manufacturers, materials, destinys, types) => {
+            const newCategoriesData = {
+                manufacturers,
+                materials,
+                destinys,
+                types,
+                isLoaded: true
+            }
+            this.setState({
+                categories: newCategoriesData
+            });
+        }));
     }
 
     componentDidMount() {
@@ -90,7 +97,7 @@ class App extends Component {
     }
 
     render() {
-
+        console.log(this.state.categories);
         if(this.state.isLoaded) {
             return (
                 <HashRouter>
