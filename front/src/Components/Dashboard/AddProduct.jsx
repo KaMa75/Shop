@@ -147,16 +147,20 @@ class AddProduct extends Component {
     }
     
     inputValue = (name, value) => {
+        console.log(value, name);
         const inputData = {
             ...value
         }
+        console.log(inputData);
         inputData.errorMessage = '';
         inputData.formError = false;
         inputData.errorMsg = '';
         inputData.formSuccess = false;
         inputData.successMsg = '';
         this.setState({
-            [name]: value
+            [name]: inputData,
+            errorMsg: '',
+            successMsg: ''
         });
     }
     
