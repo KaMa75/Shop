@@ -186,7 +186,7 @@ class AddProduct extends Component {
             type: this.state.type.value,
             destiny: this.state.destiny.value,
             color: this.state.color.value,
-            size: this.state.name.value,
+            size: this.state.size.value,
             available: this.state.available.value,
             publish: this.state.publish.value
         }
