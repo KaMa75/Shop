@@ -5,7 +5,6 @@ const ProductInfo = (props) => {
     if(!data.name) {
         return null;
     };
-    console.log(data.price.toFixed(2))
     return (
         <div>
             <section>
