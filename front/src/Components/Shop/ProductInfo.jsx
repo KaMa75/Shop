@@ -13,10 +13,10 @@ const ProductInfo = (props) => {
                     { `Produkt ${data.available ? 'dostępny' : 'niedostępny'}` }
                 </p>            
             </section>
-            <section>
+            <section className="clear-fix">
                 <div className="column">
                     <ul>
-                        <li>
+                        <li className="clear-fix">
                             <div className="label">
                                 Producent:
                             </div>
@@ -24,7 +24,7 @@ const ProductInfo = (props) => {
                                 { data.manufacturer.name }
                             </div>
                         </li>
-                        <li>
+                        <li className="clear-fix">
                             <div className="label">
                                 Model:
                             </div>
@@ -32,7 +32,7 @@ const ProductInfo = (props) => {
                                 { data.model }
                             </div>
                         </li>
-                        <li>
+                        <li className="clear-fix">
                             <div className="label">
                                 Typ:
                             </div>
@@ -40,7 +40,7 @@ const ProductInfo = (props) => {
                                 { data.type.name }
                             </div>
                         </li>
-                        <li>
+                        <li className="clear-fix">
                             <div className="label">
                                 Kolor:
                             </div>
@@ -48,7 +48,7 @@ const ProductInfo = (props) => {
                                 { data.color }
                             </div>
                         </li>
-                        <li>
+                        <li className="clear-fix">
                             <div className="label">
                                 Materiał:
                             </div>
@@ -56,7 +56,7 @@ const ProductInfo = (props) => {
                                 { data.material.name }
                             </div>
                         </li>
-                        <li>
+                        <li className="clear-fix">
                             <div className="label">
                                 Przeznaczenie:
                             </div>
@@ -64,7 +64,7 @@ const ProductInfo = (props) => {
                                 { data.destiny.name }
                             </div>
                         </li>
-                        <li>
+                        <li className="clear-fix">
                             <div className="label">
                                 Rozmiar:
                             </div>
@@ -75,7 +75,7 @@ const ProductInfo = (props) => {
                     </ul>
                 </div>
                 <div className="column">
-                    <h2>
+                    <h2 className="price">
                         { `${data.price.toFixed(2)} zł` }
                     </h2>
                     <button

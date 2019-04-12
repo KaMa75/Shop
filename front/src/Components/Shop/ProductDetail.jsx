@@ -50,8 +50,8 @@ class ProductDetail extends Component {
                 <ShopPageTop>
                     Informacje o produkcie
                 </ShopPageTop>
-                <div className="container">
-                    <div className="product-details-container">
+                <div className="container product-details">
+                    <div className="product-details-container clear-fix">
                         <div className="product-images">
                             <ProductImages
                                 images={ this.state.product.images }
