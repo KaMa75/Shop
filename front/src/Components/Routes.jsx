@@ -5,15 +5,16 @@ import MainPage from './MainPage/MainPage.jsx';
 import Register from './Register_login/Register.jsx';
 import Login from './Register_login/Login.jsx';
 import Logout from './Logout.jsx';
-import Dashboard from './Dashboard/Dashboard.jsx';
 import Shop from './Shop/Shop.jsx';
 import ProductDetail from './Shop/ProductDetail.jsx';
+import Dashboard from './Dashboard/Dashboard.jsx';
+import Basket from './Dashboard/Basket.jsx';
 import AdminInfo from './Dashboard/AdminInfo.jsx';
 import AddProduct from './Dashboard/AddProduct.jsx';
 import ManageCategories from './Dashboard/ManageCategories.jsx';
 
 const Routes = (props) => {
-    const {userData, categoriesData, addToCategoryList, setAppState} = props;
+    const {userData, categoriesData, addToCategoryList, setAppState, addToBasket, delFromBasket} = props;
     return (
         <Layout
             loggedIn={ userData.isAuth }
@@ -25,9 +26,16 @@ const Routes = (props) => {
                 <Route exact path='/shop' render={ () => (
                     <Shop
                         categoriesData={ categoriesData }
+                        addToBasket={ addToBasket }
                     />
                 )} />
-                <Route exact path='/product_details/:id' component={ ProductDetail } />
+                {/* <Route exact path='/product_details/:id' component={ ProductDetail } /> */}
+                <Route exact path='/product_details/:id' render={ (props) => (
+                    <ProductDetail
+                        { ...props }
+                        addToBasket={ addToBasket }
+                    />
+                )} />
                 <Route exact path='/user/dashboard' render={ () => (
                     !userData.isAuth ? (
                         <Redirect to='/login' />
@@ -50,8 +58,9 @@ const Routes = (props) => {
                     !userData.isAuth ? (
                         <Redirect to='/login' />
                         ) : (
-                            <Dashboard
+                            <Basket
                                 userData={ userData }
+                                delFromBasket={ delFromBasket }
                             />
                         )
                 )} />

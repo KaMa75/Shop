@@ -101,8 +101,14 @@ class Register extends Component {
     }
 
     inputValue = (name, value) => {
+        const inputData = {
+            ...value
+        };
+        inputData.errorMessage = '';
+        inputData.valid = false;
         this.setState({
-            [name]: value
+            [name]: inputData,
+            formError: false
         });
     }
 

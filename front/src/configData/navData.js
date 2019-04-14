@@ -6,11 +6,11 @@ export const userNav = [
     {
         name: 'Zaloguj',
         link: '/login'
-    },
-    {
-        name: 'Koszyk',
-        link: '/user/cart'
-    }
+    }//,
+    // {
+    //     name: 'Koszyk',
+    //     link: '/user/cart'
+    // }
 ];
 
 export const loggedUserNav = [

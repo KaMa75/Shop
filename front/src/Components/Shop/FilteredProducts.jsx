@@ -9,6 +9,7 @@ class FilteredProducts extends Component {
             return (
                 <ProductCard
                     key={ item._id }
+                    addToBasket={ this.props.addToBasket }
                     { ...item }
                 />
             );

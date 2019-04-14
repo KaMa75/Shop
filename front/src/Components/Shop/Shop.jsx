@@ -130,6 +130,7 @@ class Shop extends Component {
                                 products={ this.state.products }
                                 loadMore={ this.loadMore }
                                 showLoadMoreBtn={ this.state.showLoadMoreBtn }
+                                addToBasket={ this.props.addToBasket }
                                 isLoaded={ this.state.productsIsLoaded }
                             />
                         </div>

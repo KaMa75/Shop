@@ -37,6 +37,7 @@ class ProductDetail extends Component {
 
     addToBasket = (id) => () => {
         console.log('buy' + id);
+        this.props.addToBasket(id);
     }
 
     componentDidMount() {

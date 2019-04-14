@@ -12,7 +12,7 @@ class ProductCard extends Component {
     };
 
     addToBasket = (id) => () => {
-        console.log(`Dodaj do koszyka: ${id}`);
+        this.props.addToBasket(id);
     }
     
     render() {

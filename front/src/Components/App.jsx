@@ -38,6 +38,35 @@ class App extends Component {
         });
     }
 
+    addToBasket = (id) => {
+        const userData = this.state.user;
+        if(userData.cart.indexOf(id) === -1) {
+            userData.cart = [
+                ...userData.cart,
+                id
+            ];
+            this.setState({
+                user: userData
+            });
+        } else {
+            console.log('Ten produkt jest już w koszyku');
+        }
+    }
+
+    delFromBasket = (id, deleteAll) => {
+        console.log(id, deleteAll);
+        const userData = this.state.user;
+        if(deleteAll) {
+            userData.cart = [];
+        } else {
+            const index = userData.cart.indexOf(id);
+            userData.cart.splice(index, 1);
+        };
+        this.setState({
+            user: userData
+        });
+    }
+
     userAuth() {
         axios.get(urlAuth)
         .then(response => {
@@ -112,7 +141,9 @@ class App extends Component {
                         userData={ this.state.user }
                         categoriesData={ this.state.categories }
                         setAppState={ this.setAppState }
+                        addToBasket={ this.addToBasket }
                         addToCategoryList={ this.addToCategoryList }
+                        delFromBasket={ this.delFromBasket }
                     />
                 </HashRouter>
             );

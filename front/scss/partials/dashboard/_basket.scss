@@ -1,0 +1,30 @@
+.basket-product-list {
+    ul {
+        list-style: none;
+        border: none;
+    }
+    li {
+        border-bottom: 1px solid $colorDark;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        & > div {
+            float: left;
+        }
+        &:last-of-type {
+            border-bottom: none;
+        }
+        .del-btn {
+            button {
+                margin-top: 0;
+            }
+        }
+    }
+    .product-name {
+        width: 30%;
+    }
+    .product-price {
+        width: 30%;
+        text-align: right;
+        padding-right: 3rem;
+    }
+}
